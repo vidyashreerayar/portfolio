@@ -1,761 +1,464 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Vidyashree Rayar | AI Agents & RAG Specialist</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        display: ['Outfit', 'sans-serif'],
-                    },
-                    colors: {
-                        navy: {
-                            900: '#1e2a5e',
-                            800: '#2a3a7a',
-                            700: '#354a96',
-                        },
-                        denim: {
-                            600: '#3d5a80',
-                            500: '#4a6fa5',
-                        },
-                        mauve: {
-                            600: '#c45c7a',
-                            500: '#d4748f',
-                            400: '#e08da4',
-                        },
-                        cream: {
-                            100: '#f5ecd7',
-                            50: '#faf6ed',
-                        },
-                        tan: {
-                            400: '#d4b896',
-                            300: '#e0c9a6',
-                        }
-                    },
-                    animation: {
-                        'float': 'float 6s ease-in-out infinite',
-                        'fade-up': 'fadeUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        fadeUp: {
-                            '0%': { opacity: '0', transform: 'translateY(40px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        },
-                    }
-                }
-            }
-        }
-    </script>
-    
     <style>
-        body {
-            background-color: #faf6ed;
-            color: #1e2a5e;
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Segoe UI', system-ui, sans-serif; 
+            background: #faf6ed; 
+            color: #1e2a5e; 
+            line-height: 1.6;
         }
+        nav { 
+            position: fixed; top: 0; width: 100%; 
+            background: rgba(250, 246, 237, 0.95); 
+            padding: 1rem 2rem; 
+            border-bottom: 1px solid rgba(196, 92, 122, 0.1);
+            z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .logo { font-size: 1.5rem; font-weight: bold; }
+        .logo span { color: #c45c7a; }
+        .nav-links { display: flex; gap: 2rem; }
+        .nav-links a { 
+            text-decoration: none; color: #1e2a5e; 
+            font-weight: 500; transition: color 0.3s;
+        }
+        .nav-links a:hover { color: #c45c7a; }
         
-        .gradient-text {
+        .hero { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            padding: 6rem 2rem 2rem;
+            background: linear-gradient(135deg, rgba(196, 92, 122, 0.1) 0%, rgba(61, 90, 128, 0.1) 100%);
+        }
+        .hero-content { 
+            max-width: 800px; 
+            text-align: center;
+        }
+        .hero h1 { 
+            font-size: 3.5rem; 
+            margin-bottom: 1rem; 
             background: linear-gradient(135deg, #c45c7a 0%, #3d5a80 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            background-clip: text;
+        }
+        .hero h2 { 
+            font-size: 1.5rem; 
+            color: #3d5a80; 
+            margin-bottom: 1rem; 
+            font-weight: 400;
+        }
+        .hero p { 
+            font-size: 1.1rem; 
+            color: #1e2a5e; 
+            margin-bottom: 2rem; 
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .btn {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background: #c45c7a;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 0.5rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .btn:hover { 
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(196, 92, 122, 0.3);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #1e2a5e;
+            color: #1e2a5e;
+        }
+        .btn-outline:hover { background: #1e2a5e; color: white; }
+        
+        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #1e2a5e;
         }
         
-        .glass-card {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(196, 92, 122, 0.1);
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
         }
-        
-        .project-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        
-        .project-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px -15px rgba(196, 92, 122, 0.2);
-        }
-        
-        .skill-tag {
-            transition: all 0.3s ease;
-        }
-        
-        .skill-tag:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(196, 92, 122, 0.15);
-        }
-        
-        .nav-link {
-            position: relative;
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background-color: #c45c7a;
-            transition: width 0.3s;
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.8s ease-out;
-        }
-        
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        
-        .blob {
-            position: absolute;
-            filter: blur(40px);
-            opacity: 0.4;
-            animation: move 20s infinite alternate;
-        }
-        
-        @keyframes move {
-            from { transform: translate(0, 0) scale(1); }
-            to { transform: translate(20px, -20px) scale(1.1); }
-        }
-        
-        .project-details {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.5s ease-out;
-        }
-        
-        .project-details.active {
-            max-height: 1000px;
-        }
-        
-        .agent-card {
-            background: linear-gradient(135deg, rgba(196, 92, 122, 0.05) 0%, rgba(61, 90, 128, 0.05) 100%);
+        .skill-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
             border-left: 4px solid #c45c7a;
+        }
+        .skill-card h3 { color: #1e2a5e; margin-bottom: 1rem; }
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        .skill-tag {
+            background: rgba(196, 92, 122, 0.1);
+            color: #1e2a5e;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+        }
+        
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+        .project-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+        .project-card:hover { transform: translateY(-5px); }
+        .project-header {
+            background: linear-gradient(135deg, #1e2a5e 0%, #3d5a80 100%);
+            color: white;
+            padding: 1.5rem;
+            font-size: 2.5rem;
+            text-align: center;
+        }
+        .project-body { padding: 1.5rem; }
+        .project-body h3 { color: #1e2a5e; margin-bottom: 0.5rem; }
+        .project-category {
+            display: inline-block;
+            background: rgba(196, 92, 122, 0.1);
+            color: #c45c7a;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        .project-links {
+            margin-top: 1rem;
+            display: flex;
+            gap: 1rem;
+        }
+        .project-links a {
+            color: #c45c7a;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #c45c7a;
+            color: white;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.25rem;
+        }
+        .contact-form {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid rgba(196, 92, 122, 0.2);
+            border-radius: 8px;
+            font-family: inherit;
+        }
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #c45c7a;
+        }
+        
+        footer {
+            background: #1e2a5e;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.5rem; }
+            .nav-links { display: none; }
+            .contact-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
-<body class="font-sans antialiased overflow-x-hidden">
-
-    <!-- Navigation -->
-    <nav class="fixed w-full z-50 top-0 transition-all duration-300 bg-cream-50/80 backdrop-blur-md border-b border-mauve-600/10" id="navbar">
-        <div class="container mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
-                <a href="#" class="font-display font-bold text-2xl tracking-tight text-navy-900">
-                    VR<span class="text-mauve-600">.</span>
-                </a>
-                
-                <div class="hidden md:flex space-x-8">
-                    <a href="#about" class="nav-link text-navy-800 hover:text-mauve-600 transition-colors font-medium">About</a>
-                    <a href="#expertise" class="nav-link text-navy-800 hover:text-mauve-600 transition-colors font-medium">Expertise</a>
-                    <a href="#projects" class="nav-link text-navy-800 hover:text-mauve-600 transition-colors font-medium">Projects</a>
-                    <a href="#contact" class="nav-link text-navy-800 hover:text-mauve-600 transition-colors font-medium">Contact</a>
-                </div>
-
-                <button class="md:hidden text-2xl text-navy-900" onclick="toggleMobileMenu()">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobileMenu" class="hidden md:hidden bg-cream-50 border-t border-mauve-600/10 p-6">
-            <div class="flex flex-col space-y-4">
-                <a href="#about" class="text-navy-800 hover:text-mauve-600 transition-colors" onclick="toggleMobileMenu()">About</a>
-                <a href="#expertise" class="text-navy-800 hover:text-mauve-600 transition-colors" onclick="toggleMobileMenu()">Expertise</a>
-                <a href="#projects" class="text-navy-800 hover:text-mauve-600 transition-colors" onclick="toggleMobileMenu()">Projects</a>
-                <a href="#contact" class="text-navy-800 hover:text-mauve-600 transition-colors" onclick="toggleMobileMenu()">Contact</a>
-            </div>
+<body>
+    <nav>
+        <div class="logo">VR<span>.</span></div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Expertise</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section id="about" class="min-h-screen flex items-center justify-center relative pt-20 overflow-hidden">
-        <!-- Background Blobs -->
-        <div class="blob bg-mauve-400 w-96 h-96 rounded-full top-20 -left-20"></div>
-        <div class="blob bg-denim-500 w-72 h-72 rounded-full bottom-20 -right-20 animation-delay-2000"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="grid md:grid-cols-2 gap-12 items-center">
-                <div class="order-2 md:order-1 reveal">
-                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-mauve-600/10 rounded-full text-mauve-600 text-sm font-semibold mb-6">
-                        <span class="w-2 h-2 bg-mauve-600 rounded-full animate-pulse"></span>
-                        Available for AI Agent Opportunities
-                    </div>
-                    
-                    <h1 class="font-display text-5xl md:text-7xl font-bold mb-6 leading-tight text-navy-900">
-                        Building <span class="gradient-text">Intelligent Agents</span> & RAG Systems
-                    </h1>
-                    
-                    <h2 class="text-xl md:text-2xl text-denim-600 mb-6 font-medium">
-                        AI Agents Specialist | RAG Architecture | Power BI Intelligence | LLM Systems
-                    </h2>
-                    
-                    <p class="text-navy-800 text-lg mb-8 leading-relaxed max-w-lg">
-                        I design and deploy autonomous AI agents with advanced RAG (Retrieval-Augmented Generation) 
-                        capabilities, integrated with Power BI for intelligent business analytics. Expert in 
-                        LangChain, LlamaIndex, vector databases, and multi-agent orchestration systems.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <a href="#projects" class="px-8 py-4 bg-mauve-600 hover:bg-mauve-500 text-white rounded-full font-semibold transition-all transform hover:scale-105 shadow-lg shadow-mauve-600/30 text-center">
-                            View Agent Projects
-                        </a>
-                        <a href="mailto:vidyashreerayar325@gmail.com" class="px-8 py-4 border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-cream-50 rounded-full font-semibold transition-all text-center">
-                            Discuss AI Solutions
-                        </a>
-                    </div>
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>Building Intelligent Agents & RAG Systems</h1>
+            <h2>AI Agents Specialist | RAG Architecture | Power BI Intelligence</h2>
+            <p>I design autonomous AI agents with advanced RAG capabilities, integrated with Power BI for intelligent business analytics. Expert in LangChain, LlamaIndex, vector databases, and multi-agent orchestration.</p>
+            <div>
+                <a href="#projects" class="btn">View Projects</a>
+                <a href="mailto:vidyashreerayar325@gmail.com" class="btn btn-outline">Get In Touch</a>
+            </div>
+        </div>
+    </section>
 
-                    <div class="flex gap-6 mt-8">
-                        <a href="https://github.com/vidyashreerayar" target="_blank" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-navy-900 hover:bg-mauve-600 hover:text-white transition-all transform hover:scale-110">
-                            <i class="fab fa-github text-xl"></i>
-                        </a>
-                        <a href="https://linkedin.com/in/vidyashreerayar" target="_blank" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-navy-900 hover:bg-mauve-600 hover:text-white transition-all transform hover:scale-110">
-                            <i class="fab fa-linkedin-in text-xl"></i>
-                        </a>
-                        <a href="mailto:vidyashreerayar325@gmail.com" class="w-12 h-12 rounded-full glass-card flex items-center justify-center text-navy-900 hover:bg-mauve-600 hover:text-white transition-all transform hover:scale-110">
-                            <i class="fas fa-envelope text-xl"></i>
-                        </a>
+    <section class="section" id="skills">
+        <h2 class="section-title">Agentic AI & RAG Expertise</h2>
+        <div class="skills-grid">
+            <div class="skill-card">
+                <h3>🤖 AI Agents</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">LangChain</span>
+                    <span class="skill-tag">LlamaIndex</span>
+                    <span class="skill-tag">AutoGPT</span>
+                    <span class="skill-tag">Multi-Agent</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>🔍 RAG Architecture</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Vector DBs</span>
+                    <span class="skill-tag">Pinecone</span>
+                    <span class="skill-tag">Embeddings</span>
+                    <span class="skill-tag">Chunking</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>🧠 LLM Engineering</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">GPT-4</span>
+                    <span class="skill-tag">Llama 2/3</span>
+                    <span class="skill-tag">Fine-tuning</span>
+                    <span class="skill-tag">Prompt Engineering</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>📊 AI-Powered BI</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Power BI</span>
+                    <span class="skill-tag">Azure Vision</span>
+                    <span class="skill-tag">DAX</span>
+                    <span class="skill-tag">Smart Narratives</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>🌐 Knowledge Graphs</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Graph RAG</span>
+                    <span class="skill-tag">Neo4j</span>
+                    <span class="skill-tag">SPARQL</span>
+                    <span class="skill-tag">Wikidata</span>
+                </div>
+            </div>
+            <div class="skill-card">
+                <h3>💻 Core Stack</h3>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">FastAPI</span>
+                    <span class="skill-tag">Docker</span>
+                    <span class="skill-tag">AWS/GCP</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-header">🗄️</div>
+                <div class="project-body">
+                    <span class="project-category">RAG SYSTEM</span>
+                    <h3>NL-to-SPARQL Agent</h3>
+                    <p>Autonomous agent converting natural language to SPARQL queries with entity linking and knowledge graph traversal using Wikidata.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">SPARQL</span>
+                        <span class="skill-tag">NLP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vidyashreerayar/nl-to-sparql-wikidata" target="_blank">GitHub →</a>
                     </div>
                 </div>
+            </div>
 
-                <div class="order-1 md:order-2 flex justify-center reveal">
-                    <div class="relative">
-                        <div class="absolute inset-0 bg-mauve-600 rounded-full blur-3xl opacity-20 animate-pulse"></div>
-                        <img src="myphoto.jpg" alt="Vidyashree Rayar" class="relative w-80 h-80 object-cover rounded-full border-4 border-cream-100 shadow-2xl animate-float">
-                        <div class="absolute -bottom-4 -right-4 bg-cream-50 p-4 rounded-2xl shadow-xl border border-mauve-600/10">
-                            <p class="text-mauve-600 font-bold text-2xl">Agentic</p>
-                            <p class="text-navy-800 text-sm">AI Expert</p>
-                        </div>
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #3d5a80 0%, #1e2a5e 100%);">🏭</div>
+                <div class="project-body">
+                    <span class="project-category">LLM FINE-TUNING</span>
+                    <h3>BERT for Industrial NER</h3>
+                    <p>Domain-specific Named Entity Recognition using fine-tuned BERT for industrial maintenance logs and technical documents.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">BERT</span>
+                        <span class="skill-tag">HuggingFace</span>
+                        <span class="skill-tag">PyTorch</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vidyashreerayar/BERT-Fine-Tuning-for-Industrial-NER" target="_blank">GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #c45c7a 0%, #d4748f 100%);">🏨</div>
+                <div class="project-body">
+                    <span class="project-category">AI-POWERED BI</span>
+                    <h3>AI-Enhanced Power BI: Airbnb</h3>
+                    <p>Power BI dashboard enriched with Azure Vision API for automated image analysis and K-means clustering of listings.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">Power BI</span>
+                        <span class="skill-tag">Azure Vision</span>
+                        <span class="skill-tag">Clustering</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #d4b896 0%, #c45c7a 100%);">😊</div>
+                <div class="project-body">
+                    <span class="project-category">COMPUTER VISION</span>
+                    <h3>Attention-Enhanced Emotion Recognition</h3>
+                    <p>Facial Emotion Recognition with CBAM (Convolutional Block Attention Module) for mood-based music recommendations.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">CNN</span>
+                        <span class="skill-tag">CBAM</span>
+                        <span class="skill-tag">OpenCV</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vidyashreerayar/Enhancing-FER-using-CBAM-Attention" target="_blank">GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #e0c9a6 0%, #d4b896 100%); color: #1e2a5e;">☀️</div>
+                <div class="project-body">
+                    <span class="project-category">DEEP LEARNING</span>
+                    <h3>Solar Panel Fit Estimation</h3>
+                    <p>Satellite imagery analysis using DeepLabV3 segmentation and MiDaS depth estimation for rooftop solar feasibility.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">PyTorch</span>
+                        <span class="skill-tag">DeepLabV3</span>
+                        <span class="skill-tag">MiDaS</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank">GitHub →</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header" style="background: linear-gradient(135deg, #e50914 0%, #b20710 100%);">🎬</div>
+                <div class="project-body">
+                    <span class="project-category">DATA ANALYTICS</span>
+                    <h3>Netflix Strategy Analytics</h3>
+                    <p>Strategic analysis of Netflix content using Python, Pandas, and Plotly to optimize content and release strategies.</p>
+                    <div class="skill-tags" style="margin-top: 1rem;">
+                        <span class="skill-tag">Pandas</span>
+                        <span class="skill-tag">Plotly</span>
+                        <span class="skill-tag">EDA</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/vidyashreerayar/Data-Analytics-in-Netflix-Viewership-Trends-Pandas-Plotly" target="_blank">GitHub →</a>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Expertise Section -->
-    <section id="expertise" class="py-20 bg-cream-100 relative">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-navy-900 mb-4">Agentic AI & RAG Expertise</h2>
-                <p class="text-navy-800 max-w-3xl mx-auto">Building autonomous systems that reason, retrieve, and act—integrated with enterprise BI</p>
+    <section class="section" id="contact">
+        <h2 class="section-title">Let's Connect</h2>
+        <div class="contact-grid">
+            <div class="contact-info">
+                <div class="contact-item">
+                    <div class="contact-icon">✉️</div>
+                    <div>
+                        <h4>Email</h4>
+                        <p>vidyashreerayar325@gmail.com</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💼</div>
+                    <div>
+                        <h4>LinkedIn</h4>
+                        <p>linkedin.com/in/vidyashreerayar</p>
+                    </div>
+                </div>
+                <div class="contact-item">
+                    <div class="contact-icon">💻</div>
+                    <div>
+                        <h4>GitHub</h4>
+                        <p>github.com/vidyashreerayar</p>
+                    </div>
+                </div>
             </div>
-
-            <!-- Core Competencies -->
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-                <!-- AI Agents -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-mauve-600/10 rounded-xl flex items-center justify-center mb-6 text-mauve-600">
-                        <i class="fas fa-robot text-2xl"></i>
+            <div class="contact-form">
+                <h3 style="margin-bottom: 1.5rem; color: #1e2a5e;">Send a Message</h3>
+                <form onsubmit="event.preventDefault(); alert('Message sent!');">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">AI Agents</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">LangChain</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">LlamaIndex</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">AutoGPT</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Multi-Agent Orchestration</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Tool Use</span>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
                     </div>
-                </div>
-
-                <!-- RAG Systems -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-mauve-600/10 rounded-xl flex items-center justify-center mb-6 text-mauve-600">
-                        <i class="fas fa-search-plus text-2xl"></i>
+                    <div class="form-group">
+                        <textarea rows="4" placeholder="Your Message" required></textarea>
                     </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">RAG Architecture</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Vector DBs</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Pinecone</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Weaviate</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">ChromaDB</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Embeddings</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Chunking Strategies</span>
-                    </div>
-                </div>
-
-                <!-- LLMs -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-mauve-600/10 rounded-xl flex items-center justify-center mb-6 text-mauve-600">
-                        <i class="fas fa-brain text-2xl"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">LLM Engineering</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">GPT-4/3.5</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Llama 2/3</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Claude</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Fine-Tuning</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Prompt Engineering</span>
-                    </div>
-                </div>
-
-                <!-- Knowledge Graphs -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-mauve-600/10 rounded-xl flex items-center justify-center mb-6 text-mauve-600">
-                        <i class="fas fa-project-diagram text-2xl"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">Knowledge Graphs</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Graph RAG</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Neo4j</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">SPARQL</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Wikidata</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Entity Extraction</span>
-                    </div>
-                </div>
-
-                <!-- Power BI -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-denim-600/10 rounded-xl flex items-center justify-center mb-6 text-denim-600">
-                        <i class="fas fa-chart-pie text-2xl"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">AI-Powered BI</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Power BI</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">DAX</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Power Query</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Azure Vision</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Smart Narratives</span>
-                    </div>
-                </div>
-
-                <!-- Core Tech -->
-                <div class="agent-card glass-card rounded-2xl p-8 reveal">
-                    <div class="w-14 h-14 bg-mauve-600/10 rounded-xl flex items-center justify-center mb-6 text-mauve-600">
-                        <i class="fas fa-code text-2xl"></i>
-                    </div>
-                    <h3 class="font-display text-xl font-bold text-navy-900 mb-4">Core Stack</h3>
-                    <div class="flex flex-wrap gap-2">
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Python</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">FastAPI</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">Docker</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">AWS/GCP</span>
-                        <span class="skill-tag px-3 py-1 bg-white rounded-full text-sm text-navy-800 border border-mauve-600/20">OpenAI API</span>
-                    </div>
-                </div>
+                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
+                </form>
             </div>
         </div>
     </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 bg-cream-50">
-        <div class="container mx-auto px-6">
-            <div class="text-center mb-16 reveal">
-                <h2 class="font-display text-4xl md:text-5xl font-bold text-navy-900 mb-4">Agentic AI Projects</h2>
-                <p class="text-navy-800 max-w-2xl mx-auto">RAG systems, intelligent agents, and AI-integrated business intelligence</p>
-            </div>
-
-            <!-- Category Toggle -->
-            <div class="flex flex-wrap justify-center gap-4 mb-12 reveal">
-                <button onclick="filterProjects('all')" class="filter-btn active px-6 py-2 rounded-full bg-mauve-600 text-white transition-all" data-filter="all">All Projects</button>
-                <button onclick="filterProjects('agents')" class="filter-btn px-6 py-2 rounded-full glass-card text-navy-800 hover:bg-mauve-600 hover:text-white transition-all" data-filter="agents">🤖 AI Agents & RAG</button>
-                <button onclick="filterProjects('bi')" class="filter-btn px-6 py-2 rounded-full glass-card text-navy-800 hover:bg-mauve-600 hover:text-white transition-all" data-filter="bi">📊 AI-Powered BI</button>
-                <button onclick="filterProjects('nlp')" class="filter-btn px-6 py-2 rounded-full glass-card text-navy-800 hover:bg-mauve-600 hover:text-white transition-all" data-filter="nlp">🧠 NLP & CV</button>
-            </div>
-
-            <!-- Projects Grid -->
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto" id="projectsGrid">
-                
-                <!-- Project 1: NL-to-SPARQL (RAG/Agentic) -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="agents">
-                    <div class="h-48 bg-gradient-to-br from-navy-900 to-navy-800 flex items-center justify-center text-cream-50 text-6xl">
-                        <i class="fas fa-database"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-mauve-600/10 text-mauve-600 rounded-full text-xs font-semibold">RAG System</span>
-                            <span class="px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-xs font-semibold">Agentic</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">NL-to-SPARQL Agent with Wikidata</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Autonomous agent converting natural language to SPARQL queries with entity linking and knowledge graph traversal.</p>
-                        
-                        <button onclick="toggleProject('p1')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p1"></i>
-                        </button>
-                        
-                        <div id="p1" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Architecture:</strong> Agentic RAG with Knowledge Graph</p>
-                            <p class="mb-3">Built an intelligent agent that parses natural language questions, extracts entities, links to Wikidata, and generates/executes SPARQL queries autonomously.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>Intent detection and entity extraction pipelines</li>
-                                <li>Entity linking to Wikidata Knowledge Graph</li>
-                                <li>Dynamic SPARQL query generation and optimization</li>
-                                <li>Result parsing and natural language response generation</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Python</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">SPARQL</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Wikidata API</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">NLP</span>
-                            </div>
-                            <a href="https://github.com/vidyashreerayar/nl-to-sparql-wikidata" target="_blank" class="inline-flex items-center gap-2 text-mauve-600 hover:text-mauve-700 font-semibold">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 2: BERT NER (NLP) -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="nlp">
-                    <div class="h-48 bg-gradient-to-br from-navy-800 to-navy-700 flex items-center justify-center text-cream-50 text-6xl">
-                        <i class="fas fa-industry"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-mauve-600/10 text-mauve-600 rounded-full text-xs font-semibold">LLM Fine-tuning</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">BERT Fine-Tuning for Industrial NER</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Domain-specific Named Entity Recognition using fine-tuned BERT for industrial maintenance logs and technical documents.</p>
-                        
-                        <button onclick="toggleProject('p2')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p2"></i>
-                        </button>
-                        
-                        <div id="p2" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Use Case:</strong> Extract entities from industrial datasheets, maintenance logs, and technical reports</p>
-                            <p class="mb-3">Fine-tuned BERT-large for domain-specific NER with custom entity types. Includes complete evaluation pipeline with confusion matrices and F1 analysis.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>Transformer fine-tuning with HuggingFace & PyTorch</li>
-                                <li>CoNLL format data preprocessing and token alignment</li>
-                                <li>Custom entity recognition for industrial domain</li>
-                                <li>Performance visualization and error analysis</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">BERT</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">HuggingFace</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">PyTorch</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">NER</span>
-                            </div>
-                            <a href="https://github.com/vidyashreerayar/BERT-Fine-Tuning-for-Industrial-NER" target="_blank" class="inline-flex items-center gap-2 text-mauve-600 hover:text-mauve-700 font-semibold">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 3: AI Power BI -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="bi">
-                    <div class="h-48 bg-gradient-to-br from-denim-600 to-navy-800 flex items-center justify-center text-cream-50 text-6xl">
-                        <i class="fas fa-hotel"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-denim-600/10 text-denim-600 rounded-full text-xs font-semibold">AI-Powered BI</span>
-                            <span class="px-3 py-1 bg-purple-500/10 text-purple-600 rounded-full text-xs font-semibold">Computer Vision</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">AI-Enhanced Power BI: Airbnb Intelligence</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Power BI dashboard enriched with Azure Vision API for automated image analysis and K-means clustering of listings.</p>
-                        
-                        <button onclick="toggleProject('p3')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p3"></i>
-                        </button>
-                        
-                        <div id="p3" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Innovation:</strong> CV + BI Integration</p>
-                            <p class="mb-3">Automated analysis of Airbnb listing images using Azure Computer Vision API, extracting tags and features fed into Power BI for clustering and pricing insights.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>Azure Vision API integration for batch image processing</li>
-                                <li>Automated tagging and feature extraction</li>
-                                <li>K-means clustering for market segmentation</li>
-                                <li>Interactive Power BI dashboard with AI insights</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Power BI</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Azure Vision</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">DAX</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Clustering</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 4: FER with CBAM -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="nlp">
-                    <div class="h-48 bg-gradient-to-br from-mauve-500 to-mauve-600 flex items-center justify-center text-cream-50 text-6xl">
-                        <i class="fas fa-smile-beam"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-mauve-600/10 text-mauve-600 rounded-full text-xs font-semibold">Computer Vision</span>
-                            <span class="px-3 py-1 bg-blue-500/10 text-blue-600 rounded-full text-xs font-semibold">Attention</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Attention-Enhanced Emotion Recognition</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Facial Emotion Recognition with CBAM (Convolutional Block Attention Module) for mood-based music recommendations.</p>
-                        
-                        <button onclick="toggleProject('p4')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p4"></i>
-                        </button>
-                        
-                        <div id="p4" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Architecture:</strong> CNN + CBAM Attention</p>
-                            <p class="mb-3">Enhanced standard CNN with Channel and Spatial Attention mechanisms for improved emotion detection accuracy, deployed in a music recommendation pipeline.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>CBAM integration for attention-aware feature extraction</li>
-                                <li>FER-2013 dataset training and augmentation</li>
-                                <li>Real-time inference with OpenCV</li>
-                                <li>Music recommendation engine based on detected emotion</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Python</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">CNN</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">CBAM</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">OpenCV</span>
-                            </div>
-                            <a href="https://github.com/vidyashreerayar/Enhancing-FER-using-CBAM-Attention" target="_blank" class="inline-flex items-center gap-2 text-mauve-600 hover:text-mauve-700 font-semibold">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 5: Solar Panel (CV) -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="nlp">
-                    <div class="h-48 bg-gradient-to-br from-tan-400 to-mauve-500 flex items-center justify-center text-navy-900 text-6xl">
-                        <i class="fas fa-solar-panel"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-mauve-600/10 text-mauve-600 rounded-full text-xs font-semibold">Computer Vision</span>
-                            <span class="px-3 py-1 bg-green-500/10 text-green-600 rounded-full text-xs font-semibold">Segmentation</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Deep Learning for Solar Potential Estimation</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Satellite imagery analysis using DeepLabV3 segmentation and MiDaS depth estimation for rooftop solar feasibility.</p>
-                        
-                        <button onclick="toggleProject('p5')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p5"></i>
-                        </button>
-                        
-                        <div id="p5" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Stack:</strong> DeepLabV3 + MiDaS + Geospatial Analysis</p>
-                            <p class="mb-3">End-to-end pipeline for solar panel installation feasibility: rooftop segmentation, slope estimation from depth maps, and capacity calculation using geospatial analysis.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>DeepLabV3 for semantic segmentation of rooftops</li>
-                                <li>MiDaS monocular depth estimation for slope analysis</li>
-                                <li>Geometric calculations for area and orientation</li>
-                                <li>Solar capacity prediction and visualization</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">PyTorch</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">DeepLabV3</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">MiDaS</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Shapely</span>
-                            </div>
-                            <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank" class="inline-flex items-center gap-2 text-mauve-600 hover:text-mauve-700 font-semibold">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Project 6: Netflix Analytics -->
-                <div class="project-card glass-card rounded-2xl overflow-hidden reveal" data-category="bi">
-                    <div class="h-48 bg-gradient-to-br from-red-700 to-red-800 flex items-center justify-center text-cream-50 text-6xl">
-                        <i class="fab fa-netflix"></i>
-                    </div>
-                    <div class="p-6">
-                        <div class="flex justify-between items-start mb-4">
-                            <span class="px-3 py-1 bg-red-600/10 text-red-700 rounded-full text-xs font-semibold">Data Analytics</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-navy-900 mb-2">Netflix Content Strategy Analytics</h3>
-                        <p class="text-navy-800 text-sm mb-4 line-clamp-2">Strategic analysis of Netflix viewership using Python, Pandas, and Plotly to optimize content and release strategies.</p>
-                        
-                        <button onclick="toggleProject('p6')" class="w-full py-2 text-mauve-600 font-semibold hover:bg-mauve-600/5 rounded-lg transition-colors flex items-center justify-center gap-2">
-                            View Details <i class="fas fa-chevron-down" id="icon-p6"></i>
-                        </button>
-                        
-                        <div id="p6" class="project-details mt-4 text-sm text-navy-800 border-t border-mauve-600/10 pt-4">
-                            <p class="mb-2"><strong>Business Impact:</strong> Content optimization insights</p>
-                            <p class="mb-3">Comprehensive analysis of Netflix catalog revealing patterns in content types, languages, and release timing to inform strategic decisions.</p>
-                            <ul class="list-disc list-inside mb-3 space-y-1 text-navy-700">
-                                <li>Temporal analysis of content releases vs viewership</li>
-                                <li>Language and regional preference mapping</li>
-                                <li>Movie vs TV Show performance comparison</li>
-                                <li>Interactive Plotly visualizations</li>
-                            </ul>
-                            <div class="flex flex-wrap gap-2 mb-3">
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Pandas</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">Plotly</span>
-                                <span class="px-2 py-1 bg-navy-100 rounded text-xs">EDA</span>
-                            </div>
-                            <a href="https://github.com/vidyashreerayar/Data-Analytics-in-Netflix-Viewership-Trends-Pandas-Plotly" target="_blank" class="inline-flex items-center gap-2 text-mauve-600 hover:text-mauve-700 font-semibold">
-                                <i class="fab fa-github"></i> View on GitHub
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 bg-cream-100 relative overflow-hidden">
-        <div class="blob bg-mauve-400 w-96 h-96 rounded-full -bottom-48 -left-20 opacity-20"></div>
-        
-        <div class="container mx-auto px-6 relative z-10">
-            <div class="max-w-4xl mx-auto">
-                <div class="text-center mb-16 reveal">
-                    <h2 class="font-display text-4xl md:text-5xl font-bold text-navy-900 mb-4">Let's Build Intelligent Systems</h2>
-                    <p class="text-navy-800">Open to AI Agent, RAG Architecture, and AI-BI Integration roles</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-12">
-                    <div class="space-y-8 reveal">
-                        <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                            <div class="w-12 h-12 bg-mauve-600 rounded-xl flex items-center justify-center text-cream-50 shrink-0">
-                                <i class="fas fa-envelope text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy-900 mb-1">Email</h3>
-                                <a href="mailto:vidyashreerayar325@gmail.com" class="text-navy-800 hover:text-mauve-600 transition-colors">vidyashreerayar325@gmail.com</a>
-                            </div>
-                        </div>
-
-                        <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                            <div class="w-12 h-12 bg-mauve-600 rounded-xl flex items-center justify-center text-cream-50 shrink-0">
-                                <i class="fab fa-linkedin-in text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy-900 mb-1">LinkedIn</h3>
-                                <a href="https://linkedin.com/in/vidyashreerayar" target="_blank" class="text-navy-800 hover:text-mauve-600 transition-colors">linkedin.com/in/vidyashreerayar</a>
-                            </div>
-                        </div>
-
-                        <div class="glass-card p-6 rounded-2xl flex items-start gap-4">
-                            <div class="w-12 h-12 bg-mauve-600 rounded-xl flex items-center justify-center text-cream-50 shrink-0">
-                                <i class="fab fa-github text-xl"></i>
-                            </div>
-                            <div>
-                                <h3 class="font-display font-bold text-navy-900 mb-1">GitHub</h3>
-                                <a href="https://github.com/vidyashreerayar" target="_blank" class="text-navy-800 hover:text-mauve-600 transition-colors">github.com/vidyashreerayar</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="glass-card p-8 rounded-2xl reveal">
-                        <h3 class="font-display text-2xl font-bold text-navy-900 mb-2">Start a Conversation</h3>
-                        <p class="text-navy-700 mb-6">Interested in AI Agents, RAG systems, or AI-powered BI? Let's talk.</p>
-                        <form onsubmit="handleSubmit(event)" class="space-y-4">
-                            <div>
-                                <input type="text" placeholder="Your Name" required class="w-full px-4 py-3 bg-white border border-mauve-600/20 rounded-lg focus:border-mauve-600 focus:outline-none transition-colors text-navy-900">
-                            </div>
-                            <div>
-                                <input type="email" placeholder="Your Email" required class="w-full px-4 py-3 bg-white border border-mauve-600/20 rounded-lg focus:border-mauve-600 focus:outline-none transition-colors text-navy-900">
-                            </div>
-                            <div>
-                                <select class="w-full px-4 py-3 bg-white border border-mauve-600/20 rounded-lg focus:border-mauve-600 focus:outline-none transition-colors text-navy-900 mb-4">
-                                    <option>I'm interested in...</option>
-                                    <option>AI Agents / RAG Systems</option>
-                                    <option>Power BI + AI Integration</option>
-                                    <option>LLM Fine-tuning</option>
-                                    <option>General Consultation</option>
-                                </select>
-                            </div>
-                            <div>
-                                <textarea rows="4" placeholder="Tell me about your project..." required class="w-full px-4 py-3 bg-white border border-mauve-600/20 rounded-lg focus:border-mauve-600 focus:outline-none transition-colors resize-none text-navy-900"></textarea>
-                            </div>
-                            <button type="submit" class="w-full py-4 bg-mauve-600 hover:bg-mauve-500 text-white rounded-lg font-semibold transition-all transform hover:scale-[1.02] shadow-lg shadow-mauve-600/30">
-                                Send Message
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="bg-navy-900 text-cream-50 py-8">
-        <div class="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center gap-4">
-            <p class="text-cream-100/80">© 2024 Vidyashree Rayar. AI Agents & RAG Specialist.</p>
-            <div class="flex gap-6">
-                <a href="https://github.com/vidyashreerayar" target="_blank" class="hover:text-mauve-400 transition-colors"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/vidyashreerayar" target="_blank" class="hover:text-mauve-400 transition-colors"><i class="fab fa-linkedin-in"></i></a>
-                <a href="mailto:vidyashreerayar325@gmail.com" class="hover:text-mauve-400 transition-colors"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
+    <footer>
+        <p>&copy; 2024 Vidyashree Rayar. AI Agents & RAG Specialist.</p>
     </footer>
-
-    <script>
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            initScrollReveal();
-        });
-
-        // Scroll Reveal Animation
-        function initScrollReveal() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        }
-
-        // Mobile Menu
-        function toggleMobileMenu() {
-            const menu = document.getElementById('mobileMenu');
-            menu.classList.toggle('hidden');
-        }
-
-        // Project Toggle
-        function toggleProject(id) {
-            const details = document.getElementById(id);
-            const icon = document.getElementById('icon-' + id);
-            
-            if (details.classList.contains('active')) {
-                details.classList.remove('active');
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                // Close others
-                document.querySelectorAll('.project-details').forEach(el => el.classList.remove('active'));
-                document.querySelectorAll('[id^="icon-"]').forEach(el => el.style.transform = 'rotate(0deg)');
-                
-                details.classList.add('active');
-                icon.style.transform = 'rotate(180deg)';
-            }
-        }
-
-        // Project Filter
-        function filterProjects(category) {
-            // Update buttons
-            document.querySelectorAll('.filter-btn').forEach(btn => {
-                if (btn.dataset.filter === category) {
-                    btn.classList.add('bg-mauve-600', 'text-white');
-                    btn.classList.remove('glass-card', 'text-navy-800');
-                } else {
-                    btn.classList.remove('bg-mauve-600', 'text-white');
-                    btn.classList.add('glass-card', 'text-navy-800');
-                }
-            });
-
-            // Filter items
-            const items = document.querySelectorAll('.project-card');
-            items.forEach(item => {
-                if (category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'block';
-                   
+</body>
+</html>
