@@ -12,4 +12,4 @@ AI Agents Specialist focused on RAG Architecture, LLM Systems, and AI-Powered Bu
 - **BI:** Power BI,Power Platform, DAX
 
 ## Contact
-vidyashree.rayar@gmail.com
+vidyas.rayar@gmail.com
