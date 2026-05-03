@@ -1,464 +1,425 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vidyashree Rayar | AI Agents & RAG Specialist</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
-            background: #faf6ed; 
-            color: #1e2a5e; 
-            line-height: 1.6;
-        }
-        nav { 
-            position: fixed; top: 0; width: 100%; 
-            background: rgba(250, 246, 237, 0.95); 
-            padding: 1rem 2rem; 
-            border-bottom: 1px solid rgba(196, 92, 122, 0.1);
-            z-index: 1000;
-            display: flex; justify-content: space-between; align-items: center;
-        }
-        .logo { font-size: 1.5rem; font-weight: bold; }
-        .logo span { color: #c45c7a; }
-        .nav-links { display: flex; gap: 2rem; }
-        .nav-links a { 
-            text-decoration: none; color: #1e2a5e; 
-            font-weight: 500; transition: color 0.3s;
-        }
-        .nav-links a:hover { color: #c45c7a; }
-        
-        .hero { 
-            min-height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            padding: 6rem 2rem 2rem;
-            background: linear-gradient(135deg, rgba(196, 92, 122, 0.1) 0%, rgba(61, 90, 128, 0.1) 100%);
-        }
-        .hero-content { 
-            max-width: 800px; 
-            text-align: center;
-        }
-        .hero h1 { 
-            font-size: 3.5rem; 
-            margin-bottom: 1rem; 
-            background: linear-gradient(135deg, #c45c7a 0%, #3d5a80 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero h2 { 
-            font-size: 1.5rem; 
-            color: #3d5a80; 
-            margin-bottom: 1rem; 
-            font-weight: 400;
-        }
-        .hero p { 
-            font-size: 1.1rem; 
-            color: #1e2a5e; 
-            margin-bottom: 2rem; 
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .btn {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background: #c45c7a;
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            margin: 0.5rem;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-        .btn:hover { 
-            transform: translateY(-3px); 
-            box-shadow: 0 10px 20px rgba(196, 92, 122, 0.3);
-        }
-        .btn-outline {
-            background: transparent;
-            border: 2px solid #1e2a5e;
-            color: #1e2a5e;
-        }
-        .btn-outline:hover { background: #1e2a5e; color: white; }
-        
-        .section { padding: 4rem 2rem; max-width: 1200px; margin: 0 auto; }
-        .section-title {
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 3rem;
-            color: #1e2a5e;
-        }
-        
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-        .skill-card {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            border-left: 4px solid #c45c7a;
-        }
-        .skill-card h3 { color: #1e2a5e; margin-bottom: 1rem; }
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-        }
-        .skill-tag {
-            background: rgba(196, 92, 122, 0.1);
-            color: #1e2a5e;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-        }
-        
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-        .project-card {
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
-        }
-        .project-card:hover { transform: translateY(-5px); }
-        .project-header {
-            background: linear-gradient(135deg, #1e2a5e 0%, #3d5a80 100%);
-            color: white;
-            padding: 1.5rem;
-            font-size: 2.5rem;
-            text-align: center;
-        }
-        .project-body { padding: 1.5rem; }
-        .project-body h3 { color: #1e2a5e; margin-bottom: 0.5rem; }
-        .project-category {
-            display: inline-block;
-            background: rgba(196, 92, 122, 0.1);
-            color: #c45c7a;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-        .project-links {
-            margin-top: 1rem;
-            display: flex;
-            gap: 1rem;
-        }
-        .project-links a {
-            color: #c45c7a;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 3rem;
-        }
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 1.5rem;
-        }
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-        }
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: #c45c7a;
-            color: white;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-        }
-        .contact-form {
-            background: white;
-            padding: 2rem;
-            border-radius: 12px;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid rgba(196, 92, 122, 0.2);
-            border-radius: 8px;
-            font-family: inherit;
-        }
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: #c45c7a;
-        }
-        
-        footer {
-            background: #1e2a5e;
-            color: white;
-            text-align: center;
-            padding: 2rem;
-        }
-        
-        @media (max-width: 768px) {
-            .hero h1 { font-size: 2.5rem; }
-            .nav-links { display: none; }
-            .contact-grid { grid-template-columns: 1fr; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vidyashree Rayar | AI / LLM Engineer</title>
+<meta name="description" content="MSc AI @ BTU Cottbus. Building LLM agents, RAG pipelines, and fine-tuned models. Open to AI/ML engineer roles in EU.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0a14; --bg-2:#10101e; --card:#15152a;
+  --text:#e8e8f0; --muted:#9090a8;
+  --neon:#00f5d4; --pink:#ff3db7; --purple:#9d4edd; --blue:#4361ee;
+  --grad:linear-gradient(135deg,#00f5d4 0%,#9d4edd 50%,#ff3db7 100%);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:var(--neon);text-decoration:none}
+a:hover{color:var(--pink)}
+
+/* animated bg */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;
+  background:
+    radial-gradient(circle at 20% 30%,rgba(0,245,212,0.15),transparent 40%),
+    radial-gradient(circle at 80% 70%,rgba(255,61,183,0.12),transparent 40%),
+    radial-gradient(circle at 50% 50%,rgba(157,78,221,0.08),transparent 60%);
+  animation:float 20s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
+
+/* nav */
+nav{
+  position:fixed;top:0;width:100%;z-index:100;
+  background:rgba(10,10,20,0.7);backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(255,255,255,0.05);
+  padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
+}
+.logo{font-weight:800;font-size:1.3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nav-links{display:flex;gap:2rem}
+.nav-links a{color:var(--muted);font-weight:500;font-size:0.95rem;transition:color 0.3s}
+.nav-links a:hover{color:var(--neon)}
+
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;position:relative}
+.hero-grid{max-width:1100px;width:100%;display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:center}
+.tagline{display:inline-block;padding:0.4rem 1rem;border:1px solid rgba(0,245,212,0.3);border-radius:50px;font-size:0.85rem;color:var(--neon);margin-bottom:1.5rem}
+.tagline::before{content:'● ';color:var(--neon);animation:blink 2s infinite}
+@keyframes blink{50%{opacity:0.3}}
+.hero h1{font-size:4rem;font-weight:800;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-0.02em}
+.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero p{font-size:1.15rem;color:var(--muted);margin-bottom:2rem;max-width:600px}
+.cta-row{display:flex;gap:1rem;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 1.8rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.3s;cursor:pointer;border:none}
+.btn-primary{background:var(--grad);color:#0a0a14}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 30px rgba(0,245,212,0.3)}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text)}
+.btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+.profile-img{width:100%;max-width:340px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid transparent;background:var(--grad);padding:4px;margin:0 auto;display:block}
+.profile-img img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+
+/* sections */
+section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
+.section-tag{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.5rem;letter-spacing:0.1em}
+.section-title{font-size:2.5rem;font-weight:800;margin-bottom:3rem;letter-spacing:-0.02em}
+.section-title .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+/* about */
+.about-text{max-width:780px;font-size:1.1rem;color:var(--muted)}
+.about-text p{margin-bottom:1rem}
+.about-text strong{color:var(--text)}
+
+/* now */
+.now-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
+.now-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad)}
+.now-card h3{font-size:1.3rem;margin-bottom:0.5rem}
+.now-card .meta{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.8rem}
+
+/* timeline */
+.timeline{border-left:2px solid rgba(255,255,255,0.1);padding-left:2rem;margin-left:1rem}
+.timeline-item{position:relative;margin-bottom:2.5rem}
+.timeline-item::before{content:'';position:absolute;left:-2.6rem;top:0.4rem;width:14px;height:14px;border-radius:50%;background:var(--grad)}
+.timeline-date{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.3rem}
+.timeline-item h3{font-size:1.2rem;margin-bottom:0.3rem}
+.timeline-item p{color:var(--muted);font-size:0.95rem}
+
+/* projects */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.project-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden}
+.project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity 0.3s}
+.project-card:hover{transform:translateY(-4px);border-color:rgba(0,245,212,0.3)}
+.project-card:hover::before{opacity:1}
+.project-cat{font-family:'JetBrains Mono',monospace;color:var(--pink);font-size:0.75rem;letter-spacing:0.1em;margin-bottom:0.8rem}
+.project-card h3{font-size:1.2rem;margin-bottom:0.6rem}
+.project-card p{color:var(--muted);font-size:0.95rem;margin-bottom:1rem}
+.tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem}
+.tag{padding:0.25rem 0.7rem;background:rgba(0,245,212,0.08);border:1px solid rgba(0,245,212,0.2);border-radius:50px;font-size:0.75rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
+
+/* talks */
+.talk-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
+.talk-date{background:var(--grad);color:#0a0a14;padding:1rem;border-radius:12px;text-align:center;min-width:90px;font-weight:700}
+.talk-date .day{font-size:1.8rem;display:block;line-height:1}
+.talk-date .month{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em}
+.talk-card h3{font-size:1.25rem;margin-bottom:0.5rem}
+.talk-card .venue{color:var(--neon);font-family:'JetBrains Mono',monospace;font-size:0.85rem;margin-bottom:0.8rem}
+.talk-card p{color:var(--muted);margin-bottom:1rem}
+.talk-quote{font-style:italic;color:var(--text);padding-left:1rem;border-left:2px solid var(--neon);margin-top:1rem}
+
+/* skills */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
+.skill-block{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.3rem}
+.skill-block h4{margin-bottom:0.8rem;font-size:1rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
+.skill-block .tag-row{margin-bottom:0}
+
+/* certs */
+.cert-list{display:flex;flex-direction:column;gap:0.8rem}
+.cert-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
+.cert-item .name{font-weight:600}
+.cert-item .date{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.85rem}
+.in-progress{color:var(--pink);font-size:0.75rem;font-family:'JetBrains Mono',monospace;background:rgba(255,61,183,0.1);padding:0.2rem 0.6rem;border-radius:50px;margin-left:0.5rem}
+
+/* contact */
+.contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
+.contact-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;transition:all 0.3s;display:block}
+.contact-item:hover{border-color:var(--neon);transform:translateY(-3px)}
+.contact-item .label{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:0.8rem;margin-bottom:0.4rem;letter-spacing:0.1em}
+.contact-item .value{color:var(--text);font-weight:500;word-break:break-all}
+
+footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05)}
+
+@media (max-width:768px){
+  .hero-grid{grid-template-columns:1fr;text-align:center}
+  .hero h1{font-size:2.5rem}
+  .nav-links{display:none}
+  .talk-card{grid-template-columns:1fr}
+  section{padding:4rem 1.2rem}
+}
+</style>
 </head>
 <body>
-    <nav>
-        <div class="logo">VR<span>.</span></div>
-        <div class="nav-links">
-            <a href="#about">About</a>
-            <a href="#skills">Expertise</a>
-            <a href="#projects">Projects</a>
-            <a href="#contact">Contact</a>
-        </div>
-    </nav>
 
-    <section class="hero" id="about">
-        <div class="hero-content">
-            <h1>Building Intelligent Agents & RAG Systems</h1>
-            <h2>AI Agents| RAG Architecture | Power BI Intelligence</h2>
-            <p>I design autonomous AI agents with advanced RAG capabilities, integrated with Power BI for intelligent business analytics. Expert in LangChain, HuggingFace, vector databases, and multi-agent orchestration.</p>
-            <div>
-                <a href="#projects" class="btn">View Projects</a>
-                <a href="mailto:vidyashree.rayar@gmail.com" class="btn btn-outline">Get In Touch</a>
-            </div>
-        </div>
-    </section>
+<nav>
+  <div class="logo">VR.</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#now">Now</a>
+    <a href="#journey">Journey</a>
+    <a href="#projects">Projects</a>
+    <a href="#talks">Talks</a>
+    <a href="#contact">Contact</a>
+  </div>
+</nav>
 
-    <section class="section" id="skills">
-        <h2 class="section-title">Agentic AI & RAG Expertise</h2>
-        <div class="skills-grid">
-            <div class="skill-card">
-                <h3>🤖 AI Agents</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">LangChain</span>
-                    <span class="skill-tag">LlamaIndex</span>
-                    <span class="skill-tag">AutoGPT</span>
-                    <span class="skill-tag">Multi-Agent</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>🔍 RAG Architecture</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Vector DBs</span>
-                    <span class="skill-tag">Pinecone</span>
-                    <span class="skill-tag">Embeddings</span>
-                    <span class="skill-tag">Chunking</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>🧠 LLM Engineering</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">GPT-4</span>
-                    <span class="skill-tag">Llama 2/3</span>
-                    <span class="skill-tag">Fine-tuning</span>
-                    <span class="skill-tag">Prompt Engineering</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>📊 AI-Powered BI</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Power BI</span>
-                    <span class="skill-tag">Azure Vision</span>
-                    <span class="skill-tag">DAX</span>
-                    <span class="skill-tag">Smart Narratives</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>🌐 Knowledge Graphs</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Graph RAG</span>
-                    <span class="skill-tag">Neo4j</span>
-                    <span class="skill-tag">SPARQL</span>
-                    <span class="skill-tag">Wikidata</span>
-                </div>
-            </div>
-            <div class="skill-card">
-                <h3>💻 Core Stack</h3>
-                <div class="skill-tags">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">FastAPI</span>
-                    <span class="skill-tag">Docker</span>
-                    <span class="skill-tag">AWS/GCP</span>
-                </div>
-            </div>
-        </div>
-    </section>
+<section class="hero">
+  <div class="hero-grid">
+    <div>
+      <span class="tagline mono">Open to AI / LLM Engineer roles · EU</span>
+      <h1>Building <span class="grad">intelligent agents</span> & RAG systems</h1>
+      <p>MSc Artificial Intelligence @ BTU Cottbus. I design LLM agents, RAG pipelines, and fine-tuned models — turning research into production-grade AI.</p>
+      <div class="cta-row">
+        <a href="mailto:vidya.rayar@gmail.com?subject=Resume Request" class="btn btn-primary">📄 Request Resume</a>   
+        <a href="#projects" class="btn btn-ghost">View Projects</a>
+        <a href="#contact" class="btn btn-ghost">Get in Touch</a>
+      </div>
+    </div>
+    <div>
+      <div class="profile-img"><img src="profile.jpg" alt="Vidyashree Rayar"></div>
+    </div>
+  </div>
+</section>
 
-    <section class="section" id="projects">
-        <h2 class="section-title">Featured Projects</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-header">🗄️</div>
-                <div class="project-body">
-                    <span class="project-category">RAG SYSTEM</span>
-                    <h3>NL-to-SPARQL Agent</h3>
-                    <p>Autonomous agent converting natural language to SPARQL queries with entity linking and knowledge graph traversal using Wikidata.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">SPARQL</span>
-                        <span class="skill-tag">NLP</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vidyashreerayar/nl-to-sparql-wikidata" target="_blank">GitHub →</a>
-                    </div>
-                </div>
-            </div>
+<section id="about">
+  <div class="section-tag mono">// ABOUT</div>
+  <h2 class="section-title">Who I am</h2>
+  <div class="about-text">
+    <p>I'm <strong>Vidyashree</strong> — an MSc AI student at Brandenburg University of Technology, focused on <strong>LLM agents, RAG architecture, and fine-tuning</strong>.</p>
+    <p>My current work centers on bringing language models into industrial control — using LoRA/QLoRA-adapted Llama 3.2 to make hydraulic process systems adaptive and natural-language driven.</p>
+    <p>I believe in <em>"true speed is predictable, secure, and reliable execution"</em> — production-grade AI that works, not just demos.</p>
+  </div>
+</section>
 
-            <div class="project-card">
-                <div class="project-header" style="background: linear-gradient(135deg, #3d5a80 0%, #1e2a5e 100%);">🏭</div>
-                <div class="project-body">
-                    <span class="project-category">LLM FINE-TUNING</span>
-                    <h3>BERT for Industrial NER</h3>
-                    <p>Domain-specific Named Entity Recognition using fine-tuned BERT for industrial maintenance logs and technical documents.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">BERT</span>
-                        <span class="skill-tag">HuggingFace</span>
-                        <span class="skill-tag">PyTorch</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vidyashreerayar/BERT-Fine-Tuning-for-Industrial-NER" target="_blank">GitHub →</a>
-                    </div>
-                </div>
-            </div>
+<section id="now">
+  <div class="section-tag mono">// NOW</div>
+  <h2 class="section-title">What I'm <span class="grad">currently building</span></h2>
 
-            <div class="project-card">
-                <div class="project-header" style="background: linear-gradient(135deg, #c45c7a 0%, #d4748f 100%);">🏨</div>
-                <div class="project-body">
-                    <span class="project-category">AI-POWERED BI</span>
-                    <h3>AI-Enhanced Power BI: Airbnb</h3>
-                    <p>Power BI dashboard enriched with Azure Vision API for automated image analysis and K-means clustering of listings.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">Power BI</span>
-                        <span class="skill-tag">Azure Vision</span>
-                        <span class="skill-tag">Clustering</span>
-                    </div>
-                </div>
-            </div>
+  <div class="now-card">
+    <div class="meta">🔬 MASTER'S THESIS · IN PROGRESS</div>
+    <h3>LLM-Based Control of Festo Fluid Process Systems</h3>
+    <p>Replacing rule-based PID and C++ HTTP control logic with adaptive AI decision-making. Fine-tuned <strong>Llama 3.2 3B Instruct</strong> with LoRA/QLoRA on hybrid real + physics-informed simulated data (20 sensor variables, 5s sampling). Closed-loop evaluation on level + temperature control.</p>
+    <div class="tag-row">
+      <span class="tag">Llama 3.2</span>
+      <span class="tag">LoRA</span>
+      <span class="tag">QLoRA</span>
+      <span class="tag">PyTorch</span>
+      <span class="tag">Industrial AI</span>
+    </div>
+  </div>
 
-            <div class="project-card">
-                <div class="project-header" style="background: linear-gradient(135deg, #d4b896 0%, #c45c7a 100%);">😊</div>
-                <div class="project-body">
-                    <span class="project-category">COMPUTER VISION</span>
-                    <h3>Attention-Enhanced Emotion Recognition</h3>
-                    <p>Facial Emotion Recognition with CBAM (Convolutional Block Attention Module) for mood-based music recommendations.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">CNN</span>
-                        <span class="skill-tag">CBAM</span>
-                        <span class="skill-tag">OpenCV</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vidyashreerayar/Enhancing-FER-using-CBAM-Attention" target="_blank">GitHub →</a>
-                    </div>
-                </div>
-            </div>
+  <div class="now-card">
+    <div class="meta">🚀 PERSONAL PROJECT · STARTING</div>
+    <h3>SupportPilot — Agentic AI for OSS Maintainers</h3>
+    <p>Building an end-to-end agent that auto-classifies, prioritizes, and drafts replies to GitHub issues for open-source maintainers. n8n + LangGraph orchestration with RAG, evals, and Langfuse observability.</p>
+    <div class="tag-row">
+      <span class="tag">n8n</span>
+      <span class="tag">LangGraph</span>
+      <span class="tag">RAG</span>
+      <span class="tag">Langfuse</span>
+      <span class="tag">FastAPI</span>
+    </div>
+  </div>
+</section>
 
-            <div class="project-card">
-                <div class="project-header" style="background: linear-gradient(135deg, #e0c9a6 0%, #d4b896 100%); color: #1e2a5e;">☀️</div>
-                <div class="project-body">
-                    <span class="project-category">DEEP LEARNING</span>
-                    <h3>Solar Panel Fit Estimation</h3>
-                    <p>Satellite imagery analysis using DeepLabV3 segmentation and MiDaS depth estimation for rooftop solar feasibility.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">PyTorch</span>
-                        <span class="skill-tag">DeepLabV3</span>
-                        <span class="skill-tag">MiDaS</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank">GitHub →</a>
-                    </div>
-                </div>
-            </div>
+<section id="journey">
+  <div class="section-tag mono">// JOURNEY</div>
+  <h2 class="section-title">My <span class="grad">AI journey</span></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-date mono">JUN 2026 · UPCOMING</div>
+      <h3>Master's Thesis Defense</h3>
+      <p>Expected completion of LLM-based fluid process control thesis at BTU Cottbus.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date mono">APR 2026</div>
+      <h3>RSS Research Pitch & Networking Event</h3>
+      <p>Presented 5-min thesis pitch at BTU Cottbus-Senftenberg, organized by Dr. Mahdi Taheri.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date mono">FEB 2026</div>
+      <h3>Time-Based AI Agent (Tool Integration)</h3>
+      <p>Built a tool-augmented agent on Qwen2.5-Coder-32B with dynamic tool calling, deployed as a Gradio app on Hugging Face Spaces.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date mono">JAN 2026</div>
+      <h3>RAG Pipeline (LangChain)</h3>
+      <p>Scalable RAG pipeline with semantic search over enterprise documents.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date mono">SEP 2025</div>
+      <h3>Started Master's Thesis</h3>
+      <p>Began LLM-driven adaptive control research at BTU's Reliable & Secure Systems lab.</p>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-date mono">OCT 2022</div>
+      <h3>MSc Artificial Intelligence — BTU Cottbus</h3>
+      <p>Started Master's program; transitioning from enterprise BI/ETL into AI engineering.</p>
+    </div>
+  </div>
+</section>
 
-            <div class="project-card">
-                <div class="project-header" style="background: linear-gradient(135deg, #e50914 0%, #b20710 100%);">🎬</div>
-                <div class="project-body">
-                    <span class="project-category">DATA ANALYTICS</span>
-                    <h3>Netflix Strategy Analytics</h3>
-                    <p>Strategic analysis of Netflix content using Python, Pandas, and Plotly to optimize content and release strategies.</p>
-                    <div class="skill-tags" style="margin-top: 1rem;">
-                        <span class="skill-tag">Pandas</span>
-                        <span class="skill-tag">Plotly</span>
-                        <span class="skill-tag">EDA</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/vidyashreerayar/Data-Analytics-in-Netflix-Viewership-Trends-Pandas-Plotly" target="_blank">GitHub →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<section id="projects">
+  <div class="section-tag mono">// PROJECTS</div>
+  <h2 class="section-title">Selected <span class="grad">work</span></h2>
+  <div class="projects-grid">
 
-    <section class="section" id="contact">
-        <h2 class="section-title">Let's Connect</h2>
-        <div class="contact-grid">
-            <div class="contact-info">
-                <div class="contact-item">
-                    <div class="contact-icon">✉️</div>
-                    <div>
-                        <h4>Email</h4>
-                        <p>vidya.rayar@gmail.com</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">💼</div>
-                    <div>
-                        <h4>LinkedIn</h4>
-                        <p>linkedin.com/in/vidyashreerayar</p>
-                    </div>
-                </div>
-                <div class="contact-item">
-                    <div class="contact-icon">💻</div>
-                    <div>
-                        <h4>GitHub</h4>
-                        <p>github.com/vidyashreerayar</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contact-form">
-                <h3 style="margin-bottom: 1.5rem; color: #1e2a5e;">Send a Message</h3>
-                <form onsubmit="event.preventDefault(); alert('Message sent!');">
-                    <div class="form-group">
-                        <input type="text" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea rows="4" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn" style="width: 100%; border: none; cursor: pointer;">Send Message</button>
-                </form>
-            </div>
-        </div>
-    </section>
+    <div class="project-card">
+      <div class="project-cat mono">AI AGENT · TOOL USE</div>
+      <h3>Time-Based AI Agent</h3>
+      <p>Tool-augmented agent on Qwen2.5-Coder-32B with dynamic tool calling, deployed as a Gradio app on Hugging Face Spaces.</p>
+      <div class="tag-row"><span class="tag">Qwen2.5</span><span class="tag">HF Spaces</span><span class="tag">Gradio</span></div>
+      <a href="https://github.com/vidyashreerayar" target="_blank">GitHub →</a>
+    </div>
 
-    <footer>
-        <p>&copy; 2024 Vidyashree Rayar. AI Agents & RAG Specialist.</p>
-    </footer>
+    <div class="project-card">
+      <div class="project-cat mono">RAG · LANGCHAIN</div>
+      <h3>RAG Pipeline for Enterprise Docs</h3>
+      <p>Semantic search + LLM reasoning over unstructured enterprise documents using Chroma, RecursiveCharacterTextSplitter, and Gemini 2.5 Flash Lite.</p>
+      <div class="tag-row"><span class="tag">LangChain</span><span class="tag">Chroma</span><span class="tag">Gemini</span></div>
+      <a href="https://github.com/vidyashreerayar" target="_blank">GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-cat mono">KNOWLEDGE GRAPH · RAG</div>
+      <h3>NL-to-SPARQL Agent</h3>
+      <p>Natural-language to SPARQL conversion with entity linking and Wikidata knowledge graph traversal.</p>
+      <div class="tag-row"><span class="tag">SPARQL</span><span class="tag">Wikidata</span><span class="tag">Python</span></div>
+      <a href="https://github.com/vidyashreerayar/nl-to-sparql-wikidata" target="_blank">GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-cat mono">LLM · FINE-TUNING</div>
+      <h3>BERT Fine-Tuning for Industrial NER</h3>
+      <p>Domain-specific Named Entity Recognition fine-tuned on industrial maintenance logs and technical documents.</p>
+      <div class="tag-row"><span class="tag">BERT</span><span class="tag">HuggingFace</span><span class="tag">PyTorch</span></div>
+      <a href="https://github.com/vidyashreerayar/BERT-Fine-Tuning-for-Industrial-NER" target="_blank">GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-cat mono">COMPUTER VISION</div>
+      <h3>FER with CBAM Attention</h3>
+      <p>Facial Emotion Recognition enhanced with Convolutional Block Attention Module for mood-aware applications.</p>
+      <div class="tag-row"><span class="tag">CNN</span><span class="tag">CBAM</span><span class="tag">OpenCV</span></div>
+      <a href="https://github.com/vidyashreerayar/Enhancing-FER-using-CBAM-Attention" target="_blank">GitHub →</a>
+    </div>
+
+    <div class="project-card">
+      <div class="project-cat mono">DEEP LEARNING · CV</div>
+      <h3>Solar Panel Fit Estimation</h3>
+      <p>Satellite imagery analysis using DeepLabV3 segmentation + MiDaS depth estimation for rooftop solar feasibility.</p>
+      <div class="tag-row"><span class="tag">DeepLabV3</span><span class="tag">MiDaS</span><span class="tag">PyTorch</span></div>
+      <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank">GitHub →</a>
+    </div>
+  </div>
+</section>
+
+<section id="talks">
+  <div class="section-tag mono">// TALKS & WRITING</div>
+  <h2 class="section-title">Sharing the <span class="grad">work</span></h2>
+  <div class="talk-card">
+    <div class="talk-date">
+      <span class="day">07</span>
+      <span class="month">Apr 26</span>
+    </div>
+    <div>
+      <h3>LLM-Based Control of Festo Fluid Process Systems</h3>
+      <div class="venue mono">RSS Research Pitch & Networking Event · BTU Cottbus-Senftenberg</div>
+      <p>5-minute research pitch covering motivation (control gap in industrial fluid systems), approach (Llama 3.2 + LoRA/QLoRA + closed-loop control), and current results: 92.8% accuracy on temperature control, 57.8% on level control across 689 decisions.</p>
+      <div class="tag-row">
+        <span class="tag">Research Pitch</span>
+        <span class="tag">LLM Control</span>
+        <span class="tag">Industrial AI</span>
+      </div>
+      <div class="cta-row" style="margin-top:1rem">
+        <a href="pitch-slides.pdf" class="btn btn-ghost" target="_blank">📊 Slides</a>
+        <a href="https://www.linkedin.com/feed/update/urn:li:activity:7448836036387930112/" class="btn btn-ghost" target="_blank">LinkedIn Post</a>
+      </div>
+      <div class="talk-quote">"True speed is predictable, secure, and reliable execution."</div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="section-tag mono">// STACK</div>
+  <h2 class="section-title">What I <span class="grad">work with</span></h2>
+  <div class="skills-grid">
+    <div class="skill-block">
+      <h4>LLM / AI</h4>
+      <div class="tag-row">
+        <span class="tag">PyTorch</span><span class="tag">HuggingFace</span><span class="tag">LangChain</span><span class="tag">LangGraph</span><span class="tag">LoRA / QLoRA</span><span class="tag">Prompt Eng</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>RAG / Vector DBs</h4>
+      <div class="tag-row">
+        <span class="tag">Chroma</span><span class="tag">FAISS</span><span class="tag">Embeddings</span><span class="tag">Semantic Search</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Languages</h4>
+      <div class="tag-row">
+        <span class="tag">Python</span><span class="tag">SQL</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Deployment</h4>
+      <div class="tag-row">
+        <span class="tag">FastAPI</span><span class="tag">Gradio</span><span class="tag">Docker</span><span class="tag">AWS</span><span class="tag">HF Spaces</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Data / Workflows</h4>
+      <div class="tag-row">
+        <span class="tag">Apache Airflow</span><span class="tag">n8n</span><span class="tag">ETL</span><span class="tag">Power BI</span>
+      </div>
+    </div>
+    <div class="skill-block">
+      <h4>Languages I speak</h4>
+      <div class="tag-row">
+        <span class="tag">English (Pro)</span><span class="tag">German (B1)</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="certs">
+  <div class="section-tag mono">// CERTIFICATIONS</div>
+  <h2 class="section-title">Credentials</h2>
+  <div class="cert-list">
+    <div class="cert-item">
+      <div class="name">Hugging Face AI Agents Foundational Course <span class="in-progress mono">COMPLETED</span></div>
+      <div class="date mono">Feb 2026</div>
+    </div>
+    <div class="cert-item">
+      <div class="name">Hugging Face Advanced AI Agents <span class="in-progress mono">IN PROGRESS</span></div>
+      <div class="date mono">2026</div>
+    </div>
+    <div class="cert-item">
+      <div class="name">MSc Artificial Intelligence — Brandenburg University of Technology</div>
+      <div class="date mono">Oct 2022 – Jun 2026 (expected)</div>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="section-tag mono">// CONTACT</div>
+  <h2 class="section-title">Let's <span class="grad">connect</span></h2>
+  <p style="color:var(--muted);margin-bottom:2rem;max-width:600px">Open to AI/ML & LLM Engineer roles in Germany or remote-friendly EU teams. Always happy to chat about agents, RAG, and production AI.</p>
+  <div class="contact-grid">
+    <a href="mailto:vidya.rayar@gmail.com" class="contact-item">
+      <div class="label mono">EMAIL</div>
+      <div class="value">vidya.rayar@gmail.com</div>
+    </a>
+    <a href="https://linkedin.com/in/vidyashreerayar" target="_blank" class="contact-item">
+      <div class="label mono">LINKEDIN</div>
+      <div class="value">/in/vidyashreerayar</div>
+    </a>
+    <a href="https://github.com/vidyashreerayar" target="_blank" class="contact-item">
+      <div class="label mono">GITHUB</div>
+      <div class="value">@vidyashreerayar</div>
+    </a>
+    <a href="mailto:vidya.rayar@gmail.com?subject=Resume Request" class="contact-item">
+      <div class="label mono">RESUME</div>
+      <div class="value">Email to request →</div>
+    </a>
+  </div>
+</section>
+
+<footer>
+  <p>© 2026 Vidyashree Rayar · Built with HTML, CSS, and curiosity · <span class="mono">Last updated May 2026</span></p>
+</footer>
+
 </body>
 </html>
