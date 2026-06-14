@@ -12,8 +12,18 @@
 :root{
   --bg:#0a0a0f; --bg-2:#111118; --card:#18181f;
   --text:#e8e8f0; --muted:#9090a8;
-  --neon:#F5C518; --pink:#F05A1E; --purple:#3D7FD4; --blue:#3D7FD4;
-  --subway:#00A878;
+  --neon:#5DC9A8;       /* Liberty Green — links, section tags */
+  --pink:#F05A1E;       /* Ferry Orange — active states, CTA button */
+  --purple:#3D7FD4;     /* Coffee Cup Blue — info, skill headers */
+  --blue:#3D7FD4;
+  --subway:#00A878;     /* Subway Green — done/success, talk venue */
+  --taxi:#F5C518;       /* Taxi Yellow — dates, meta labels, project cats */
+  --sand:#F5E4B8;       /* Rockaway Sand — card hover borders */
+  --skyblue:#87AEDE;    /* Skyline Blue — tags, hero h1 grad */
+  --lox:#F2957A;        /* Lox Pink — in-progress badges, nav hover */
+  --liberty:#5DC9A8;    /* Liberty Green — planned state */
+  --red:#E8192C;        /* Thank You Red — open to work dot */
+  --brick:#8B2B1A;      /* Brick Red — footer border */
   --grad:linear-gradient(135deg,#F5C518 0%,#F05A1E 100%);
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -42,29 +52,29 @@ nav{
 .logo{font-weight:800;font-size:1.3rem;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .nav-links{display:flex;gap:2rem}
 .nav-links a{color:var(--muted);font-weight:500;font-size:0.95rem;transition:color 0.3s}
-.nav-links a:hover{color:var(--neon)}
+.nav-links a:hover{color:var(--lox)}
 
-.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;position:relative}
+.hero{display:flex;align-items:center;justify-content:center;padding:6rem 2rem 3rem;position:relative}
 .hero-grid{max-width:1100px;width:100%;display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:center}
-.tagline{display:inline-block;padding:0.4rem 1rem;border:1px solid rgba(245,197,24,0.3);border-radius:50px;font-size:0.85rem;color:var(--neon);margin-bottom:1.5rem}
-.tagline::before{content:'● ';color:var(--neon);animation:blink 2s infinite}
+.tagline{display:inline-block;padding:0.4rem 1rem;border:1px solid rgba(135,174,222,0.4);border-radius:50px;font-size:0.85rem;color:var(--neon);margin-bottom:1.5rem}
+.tagline::before{content:'● ';color:var(--red);animation:blink 2s infinite}
 @keyframes blink{50%{opacity:0.3}}
 .hero h1{font-size:4rem;font-weight:800;line-height:1.1;margin-bottom:1.5rem;letter-spacing:-0.02em}
-.hero h1 .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .grad{background:linear-gradient(135deg,#87AEDE,#3D7FD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .hero p{font-size:1.15rem;color:var(--muted);margin-bottom:2rem;max-width:600px}
 .cta-row{display:flex;gap:1rem;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.9rem 1.8rem;border-radius:8px;font-weight:600;font-size:0.95rem;transition:all 0.3s;cursor:pointer;border:none}
 .btn-primary{background:var(--grad);color:#0a0a14}
 .btn-primary:hover{transform:translateY(-2px)}
 .btn-ghost{background:transparent;border:1px solid rgba(255,255,255,0.15);color:var(--text)}
-.btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+.btn-ghost:hover{border-color:var(--lox);color:var(--lox)}
 .profile-img{width:100%;max-width:340px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid transparent;background:var(--grad);padding:4px;margin:0 auto;display:block}
 .profile-img img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 
-section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
-.section-tag{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.5rem;letter-spacing:0.1em}
-.section-title{font-size:2.5rem;font-weight:800;margin-bottom:3rem;letter-spacing:-0.02em}
-.section-title .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+section{padding:2rem 2rem 1rem;max-width:1200px;margin:0 auto;position:relative}
+.section-tag{font-family:'JetBrains Mono',monospace;color:var(--taxi);font-size:0.85rem;margin-bottom:0.3rem;letter-spacing:0.1em}
+.section-title{font-size:2.5rem;font-weight:800;margin-bottom:1.5rem;letter-spacing:-0.02em}
+.section-title .grad{background:linear-gradient(135deg,#87AEDE,#3D7FD4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
 .about-text{max-width:780px;font-size:1.1rem;color:var(--muted)}
 .about-text p{margin-bottom:1rem}
@@ -73,7 +83,7 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .now-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
 .now-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad)}
 .now-card h3{font-size:1.3rem;margin-bottom:0.5rem}
-.now-card .meta{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.8rem}
+.now-card .meta{font-family:'JetBrains Mono',monospace;color:var(--taxi);font-size:0.85rem;margin-bottom:0.8rem}
 
 /* gantt timeline */
 .gantt{margin-top:1.4rem;overflow-x:auto}
@@ -91,12 +101,12 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .gantt-phase-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;padding:0.5rem 0.4rem;border-radius:6px;text-align:center;line-height:1.4}
 .gantt-phase-label.done{background:rgba(0,168,120,0.1);color:var(--subway)}
 .gantt-phase-label.active{background:rgba(240,90,30,0.1);color:var(--pink)}
-.gantt-phase-label.planned{background:rgba(255,255,255,0.05);color:var(--muted)}
+.gantt-phase-label.planned{background:rgba(93,201,168,0.08);color:var(--liberty)}
 .gantt-cell{height:34px;border-left:1px solid rgba(255,255,255,0.04)}
 .gantt-bar{height:34px;border-radius:6px;display:flex;align-items:center;padding:0 0.5rem;font-size:0.68rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gantt-bar.done{background:rgba(0,168,120,0.2);color:var(--subway);border:1px solid rgba(0,168,120,0.4)}
 .gantt-bar.active{background:linear-gradient(90deg,rgba(240,90,30,0.35),rgba(240,90,30,0.12));color:var(--pink);border:1px solid rgba(240,90,30,0.4)}
-.gantt-bar.planned{background:rgba(255,255,255,0.04);color:var(--muted);border:1px dashed rgba(255,255,255,0.15)}
+.gantt-bar.planned{background:rgba(93,201,168,0.08);color:var(--liberty);border:1px dashed var(--liberty)}
 
 /* lifecycle (compact, for project cards) */
 .lifecycle{display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem}
@@ -104,59 +114,59 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .phase-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:0.35rem}
 .phase-dot.done{background:var(--subway)}
 .phase-dot.active{background:var(--pink);box-shadow:0 0 8px var(--pink)}
-.phase-dot.planned{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2)}
+.phase-dot.planned{background:rgba(93,201,168,0.2);border:1px solid var(--liberty)}
 .phase-line{display:flex;flex-direction:column;gap:0.1rem}
 .phase-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em}
-.phase-label.done{color:var(--neon)}
+.phase-label.done{color:var(--subway)}
 .phase-label.active{color:var(--pink)}
-.phase-label.planned{color:var(--muted)}
+.phase-label.planned{color:var(--liberty)}
 .phase-desc{font-size:0.88rem;color:var(--muted)}
 
 .timeline{border-left:2px solid rgba(255,255,255,0.1);padding-left:2rem;margin-left:1rem}
-.timeline-item{position:relative;margin-bottom:2.5rem}
+.timeline-item{position:relative;margin-bottom:1.2rem}
 .timeline-item::before{content:'';position:absolute;left:-2.6rem;top:0.4rem;width:14px;height:14px;border-radius:50%;background:var(--grad)}
-.timeline-date{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.3rem}
+.timeline-date{font-family:'JetBrains Mono',monospace;color:var(--taxi);font-size:0.85rem;margin-bottom:0.3rem}
 .timeline-item h3{font-size:1.2rem;margin-bottom:0.3rem}
 .timeline-item p{color:var(--muted);font-size:0.95rem}
 
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
 .project-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden}
 .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity 0.3s}
-.project-card:hover{transform:translateY(-4px);border-color:rgba(245,197,24,0.3)}
+.project-card:hover{transform:translateY(-4px);border-color:var(--sand)}
 .project-card:hover::before{opacity:1}
-.project-cat{font-family:'JetBrains Mono',monospace;color:var(--pink);font-size:0.75rem;letter-spacing:0.1em;margin-bottom:0.8rem}
+.project-cat{font-family:'JetBrains Mono',monospace;color:var(--taxi);font-size:0.75rem;letter-spacing:0.1em;margin-bottom:0.8rem}
 .project-card h3{font-size:1.2rem;margin-bottom:0.6rem}
 .project-card p{color:var(--muted);font-size:0.95rem;margin-bottom:1rem}
 .tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem}
-.tag{padding:0.25rem 0.7rem;background:rgba(245,197,24,0.08);border:1px solid rgba(245,197,24,0.2);border-radius:50px;font-size:0.75rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
+.tag{padding:0.25rem 0.7rem;background:rgba(135,174,222,0.1);border:1px solid rgba(135,174,222,0.3);border-radius:50px;font-size:0.75rem;color:var(--skyblue);font-family:'JetBrains Mono',monospace}
 
 .talk-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
 .talk-date{background:var(--grad);color:#0a0a14;padding:1rem;border-radius:12px;text-align:center;min-width:90px;font-weight:700}
 .talk-date .day{font-size:1.8rem;display:block;line-height:1}
 .talk-date .month{font-size:0.85rem;text-transform:uppercase;letter-spacing:0.1em}
 .talk-card h3{font-size:1.25rem;margin-bottom:0.5rem}
-.talk-card .venue{color:var(--neon);font-family:'JetBrains Mono',monospace;font-size:0.85rem;margin-bottom:0.8rem}
+.talk-card .venue{color:var(--subway);font-family:'JetBrains Mono',monospace;font-size:0.85rem;margin-bottom:0.8rem}
 .talk-card p{color:var(--muted);margin-bottom:1rem}
-.talk-quote{font-style:italic;color:var(--text);padding-left:1rem;border-left:2px solid var(--neon);margin-top:1rem}
+.talk-quote{font-style:italic;color:var(--text);padding-left:1rem;border-left:2px solid var(--lox);margin-top:1rem}
 
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .skill-block{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.3rem}
-.skill-block h4{margin-bottom:0.8rem;font-size:1rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
+.skill-block h4{margin-bottom:0.8rem;font-size:1rem;color:var(--purple);font-family:'JetBrains Mono',monospace}
 .skill-block .tag-row{margin-bottom:0}
 
 .cert-list{display:flex;flex-direction:column;gap:0.8rem}
 .cert-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
 .cert-item .name{font-weight:600}
 .cert-item .date{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.85rem}
-.in-progress{color:var(--pink);font-size:0.75rem;font-family:'JetBrains Mono',monospace;background:rgba(240,90,30,0.1);padding:0.2rem 0.6rem;border-radius:50px;margin-left:0.5rem}
+.in-progress{color:var(--lox);font-size:0.75rem;font-family:'JetBrains Mono',monospace;background:rgba(242,149,122,0.12);padding:0.2rem 0.6rem;border-radius:50px;margin-left:0.5rem}
 
 .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .contact-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;transition:all 0.3s;display:block}
-.contact-item:hover{border-color:var(--neon);transform:translateY(-3px)}
+.contact-item:hover{border-color:var(--sand);transform:translateY(-3px)}
 .contact-item .label{font-family:'JetBrains Mono',monospace;color:var(--muted);font-size:0.8rem;margin-bottom:0.4rem;letter-spacing:0.1em}
 .contact-item .value{color:var(--text);font-weight:500;word-break:break-all}
 
-footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;border-top:1px solid rgba(255,255,255,0.05)}
+footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;border-top:1px solid var(--brick)}
 
 @media (max-width:768px){
   .hero-grid{grid-template-columns:1fr;text-align:center}
@@ -186,7 +196,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
     <div>
       <span class="tagline mono">Open to AI / LLM Engineer roles · EU</span>
       <h1>Building <span class="grad">intelligent agents</span> & RAG systems</h1>
-      <p>MSc Artificial Intelligence @ BTU Cottbus. I design LLM agents, RAG pipelines, and fine-tuned models — turning research into production-grade AI.</p>
+      <p>MSc Artificial Intelligence @ BTU Cottbus. I design LLM agents, RAG pipelines, and fine-tuned models. Turning research into production-grade AI.</p>
       <div class="cta-row">
         <a href="mailto:vidya.rayar@gmail.com?subject=Resume Request" class="btn btn-primary">📄 Request Resume</a>
         <a href="#projects" class="btn btn-ghost">View Projects</a>
@@ -203,9 +213,9 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
   <div class="section-tag mono">// ABOUT</div>
   <h2 class="section-title">Who I am</h2>
   <div class="about-text">
-    <p>I'm <strong>Vidyashree</strong> — an MSc AI student at Brandenburg University of Technology, focused on <strong>LLM agents, RAG architecture, and fine-tuning</strong>.</p>
-    <p>My current work centers on bringing language models into industrial control — using LoRA/QLoRA-adapted Llama 3.2 to make hydraulic process systems adaptive and natural-language driven.</p>
-    <p>I believe in <em>"true speed is predictable, secure, and reliable execution"</em> — production-grade AI that works, not just demos.</p>
+    <p>I'm <strong>Vidyashree</strong>, an MSc AI student at Brandenburg University of Technology, focused on <strong>LLM agents, RAG architecture, and fine-tuning</strong>.</p>
+    <p>My current work centers on bringing language models into industrial control, using LoRA/QLoRA-adapted Llama 3.2 to make hydraulic process systems adaptive and natural-language driven.</p>
+    <p>I believe in <em>"true speed is predictable, secure, and reliable execution"</em>. Production-grade AI that works, not just demos.</p>
   </div>
 </section>
 
@@ -229,7 +239,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
   <div class="now-card">
     <div class="meta">🏥 PERSONAL PROJECT · IN PROGRESS</div>
     <h3>Pharma Clinical Trials Agent</h3>
-    <p>Pharma analysts waste hours manually scanning ClinicalTrials.gov to track competitor activity. This pipeline fetches live trial data, runs it through <strong>Gemini AI</strong> to extract structured intelligence including phase, purpose, geography and organization, and surfaces it in a filterable dashboard. Analysts can instantly see where competitors are running trials, whether markets are still exploring (observational) or validating (interventional), and which geographies are heating up. Being evolved into an autonomous multi-agent monitoring system. See the live demo below.</p>
+    <p>Pharma analysts waste hours manually tracking competitor trial activity across public registries. This pipeline fetches live clinical trial data via public APIs (using ClinicalTrials.gov as the data source), runs it through <strong>Gemini AI</strong> to extract structured intelligence including phase, purpose, geography and organization, and surfaces it in a filterable dashboard. Analysts can instantly see where competitors are running trials, whether markets are still exploring (observational) or validating (interventional), and which geographies are heating up. Being evolved into an autonomous multi-agent monitoring system. See the live demo below.</p>
     <video src="Demo-Video.mov" controls style="width:100%;border-radius:10px;margin:1rem 0;max-height:400px;background:#000"></video>
     <div class="tag-row">
       <span class="tag">Python</span>
@@ -309,7 +319,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
     </div>
     <div class="timeline-item">
       <div class="timeline-date mono">OCT 2022</div>
-      <h3>MSc Artificial Intelligence — BTU Cottbus</h3>
+      <h3>MSc Artificial Intelligence, BTU Cottbus</h3>
       <p>Started Master's program; transitioning from enterprise BI/ETL into AI engineering.</p>
     </div>
   </div>
@@ -393,13 +403,6 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <a href="https://github.com/vidyashreerayar/Enhancing-FER-using-CBAM-Attention" target="_blank">GitHub →</a>
     </div>
 
-    <div class="project-card">
-      <div class="project-cat mono">DEEP LEARNING · CV</div>
-      <h3>Solar Panel Fit Estimation</h3>
-      <p>Satellite imagery analysis using DeepLabV3 segmentation + MiDaS depth estimation for rooftop solar feasibility.</p>
-      <div class="tag-row"><span class="tag">DeepLabV3</span><span class="tag">MiDaS</span><span class="tag">PyTorch</span></div>
-      <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank">GitHub →</a>
-    </div>
 
   </div>
 </section>
@@ -485,7 +488,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <div class="date mono">Feb 2026</div>
     </div>
     <div class="cert-item">
-      <div class="name">MSc Artificial Intelligence — Brandenburg University of Technology</div>
+      <div class="name">MSc Artificial Intelligence, Brandenburg University of Technology</div>
       <div class="date mono">Oct 2022 – Present</div>
     </div>
   </div>
