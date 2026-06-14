@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,6 @@ body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-
 a{color:var(--neon);text-decoration:none}
 a:hover{color:var(--pink)}
 
-/* animated bg */
 body::before{
   content:'';position:fixed;inset:0;z-index:-1;
   background:
@@ -32,7 +32,6 @@ body::before{
 }
 @keyframes float{0%,100%{transform:translate(0,0)}50%{transform:translate(-20px,-30px)}}
 
-/* nav */
 nav{
   position:fixed;top:0;width:100%;z-index:100;
   background:rgba(10,10,20,0.7);backdrop-filter:blur(20px);
@@ -44,7 +43,6 @@ nav{
 .nav-links a{color:var(--muted);font-weight:500;font-size:0.95rem;transition:color 0.3s}
 .nav-links a:hover{color:var(--neon)}
 
-/* hero */
 .hero{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:6rem 2rem 4rem;position:relative}
 .hero-grid{max-width:1100px;width:100%;display:grid;grid-template-columns:1.5fr 1fr;gap:4rem;align-items:center}
 .tagline{display:inline-block;padding:0.4rem 1rem;border:1px solid rgba(0,245,212,0.3);border-radius:50px;font-size:0.85rem;color:var(--neon);margin-bottom:1.5rem}
@@ -62,24 +60,57 @@ nav{
 .profile-img{width:100%;max-width:340px;aspect-ratio:1;border-radius:50%;object-fit:cover;border:3px solid transparent;background:var(--grad);padding:4px;margin:0 auto;display:block}
 .profile-img img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 
-/* sections */
 section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .section-tag{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.5rem;letter-spacing:0.1em}
 .section-title{font-size:2.5rem;font-weight:800;margin-bottom:3rem;letter-spacing:-0.02em}
 .section-title .grad{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 
-/* about */
 .about-text{max-width:780px;font-size:1.1rem;color:var(--muted)}
 .about-text p{margin-bottom:1rem}
 .about-text strong{color:var(--text)}
 
-/* now */
 .now-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;margin-bottom:1.5rem;position:relative;overflow:hidden}
 .now-card::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--grad)}
 .now-card h3{font-size:1.3rem;margin-bottom:0.5rem}
 .now-card .meta{font-family:'JetBrains Mono',monospace;color:var(--neon);font-size:0.85rem;margin-bottom:0.8rem}
 
-/* timeline */
+/* gantt timeline */
+.gantt{margin-top:1.4rem;overflow-x:auto}
+.gantt-inner{min-width:640px}
+.gantt-grid{display:grid;grid-template-columns:90px repeat(20,1fr)}
+.gantt-month-header{display:grid;grid-template-columns:90px repeat(5,4fr);margin-bottom:2px}
+.gantt-month-cell{font-family:'JetBrains Mono',monospace;font-size:0.62rem;text-align:center;padding:0.3rem 0.2rem;font-weight:700;letter-spacing:0.04em;border-radius:4px 4px 0 0;margin:0 1px}
+.gantt-month-cell.done{background:rgba(0,245,212,0.18);color:var(--neon)}
+.gantt-month-cell.active{background:rgba(255,61,183,0.25);color:var(--pink)}
+.gantt-month-cell.planned{background:rgba(255,255,255,0.06);color:var(--muted)}
+.gantt-week-cell{font-family:'JetBrains Mono',monospace;font-size:0.55rem;text-align:center;padding:0.2rem 0;color:var(--muted);border-left:1px solid rgba(255,255,255,0.06);line-height:1.2}
+.gantt-week-cell.today{color:var(--pink);font-weight:700}
+.gantt-label-cell{font-size:0.65rem}
+.gantt-row{display:grid;grid-template-columns:90px repeat(20,1fr);align-items:center;margin-top:0.4rem}
+.gantt-phase-label{font-family:'JetBrains Mono',monospace;font-size:0.65rem;font-weight:700;padding:0.5rem 0.4rem;border-radius:6px;text-align:center;line-height:1.4}
+.gantt-phase-label.done{background:rgba(0,245,212,0.1);color:var(--neon)}
+.gantt-phase-label.active{background:rgba(255,61,183,0.1);color:var(--pink)}
+.gantt-phase-label.planned{background:rgba(255,255,255,0.05);color:var(--muted)}
+.gantt-cell{height:34px;border-left:1px solid rgba(255,255,255,0.04)}
+.gantt-bar{height:34px;border-radius:6px;display:flex;align-items:center;padding:0 0.5rem;font-size:0.68rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gantt-bar.done{background:linear-gradient(90deg,rgba(0,245,212,0.35),rgba(0,245,212,0.12));color:var(--neon);border:1px solid rgba(0,245,212,0.35)}
+.gantt-bar.active{background:linear-gradient(90deg,rgba(255,61,183,0.35),rgba(255,61,183,0.12));color:var(--pink);border:1px solid rgba(255,61,183,0.4)}
+.gantt-bar.planned{background:rgba(255,255,255,0.04);color:var(--muted);border:1px dashed rgba(255,255,255,0.15)}
+
+/* lifecycle (compact, for project cards) */
+.lifecycle{display:flex;flex-direction:column;gap:0.8rem;margin-top:1.2rem}
+.lifecycle-phase{display:flex;align-items:flex-start;gap:1rem}
+.phase-dot{width:12px;height:12px;border-radius:50%;flex-shrink:0;margin-top:0.35rem}
+.phase-dot.done{background:var(--neon)}
+.phase-dot.active{background:var(--pink);box-shadow:0 0 8px var(--pink)}
+.phase-dot.planned{background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.2)}
+.phase-line{display:flex;flex-direction:column;gap:0.1rem}
+.phase-label{font-family:'JetBrains Mono',monospace;font-size:0.72rem;letter-spacing:0.08em}
+.phase-label.done{color:var(--neon)}
+.phase-label.active{color:var(--pink)}
+.phase-label.planned{color:var(--muted)}
+.phase-desc{font-size:0.88rem;color:var(--muted)}
+
 .timeline{border-left:2px solid rgba(255,255,255,0.1);padding-left:2rem;margin-left:1rem}
 .timeline-item{position:relative;margin-bottom:2.5rem}
 .timeline-item::before{content:'';position:absolute;left:-2.6rem;top:0.4rem;width:14px;height:14px;border-radius:50%;background:var(--grad)}
@@ -87,7 +118,6 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .timeline-item h3{font-size:1.2rem;margin-bottom:0.3rem}
 .timeline-item p{color:var(--muted);font-size:0.95rem}
 
-/* projects */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
 .project-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:1.8rem;transition:all 0.3s;position:relative;overflow:hidden}
 .project-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--grad);opacity:0;transition:opacity 0.3s}
@@ -99,7 +129,6 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .tag-row{display:flex;flex-wrap:wrap;gap:0.4rem;margin-bottom:1rem}
 .tag{padding:0.25rem 0.7rem;background:rgba(0,245,212,0.08);border:1px solid rgba(0,245,212,0.2);border-radius:50px;font-size:0.75rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
 
-/* talks */
 .talk-card{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:16px;padding:2rem;display:grid;grid-template-columns:auto 1fr;gap:1.5rem;align-items:start}
 .talk-date{background:var(--grad);color:#0a0a14;padding:1rem;border-radius:12px;text-align:center;min-width:90px;font-weight:700}
 .talk-date .day{font-size:1.8rem;display:block;line-height:1}
@@ -109,20 +138,17 @@ section{padding:6rem 2rem;max-width:1200px;margin:0 auto;position:relative}
 .talk-card p{color:var(--muted);margin-bottom:1rem}
 .talk-quote{font-style:italic;color:var(--text);padding-left:1rem;border-left:2px solid var(--neon);margin-top:1rem}
 
-/* skills */
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1rem}
 .skill-block{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.3rem}
 .skill-block h4{margin-bottom:0.8rem;font-size:1rem;color:var(--neon);font-family:'JetBrains Mono',monospace}
 .skill-block .tag-row{margin-bottom:0}
 
-/* certs */
 .cert-list{display:flex;flex-direction:column;gap:0.8rem}
 .cert-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:10px;padding:1rem 1.5rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:0.5rem}
 .cert-item .name{font-weight:600}
 .cert-item .date{color:var(--muted);font-family:'JetBrains Mono',monospace;font-size:0.85rem}
 .in-progress{color:var(--pink);font-size:0.75rem;font-family:'JetBrains Mono',monospace;background:rgba(255,61,183,0.1);padding:0.2rem 0.6rem;border-radius:50px;margin-left:0.5rem}
 
-/* contact */
 .contact-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem}
 .contact-item{background:var(--card);border:1px solid rgba(255,255,255,0.05);border-radius:12px;padding:1.5rem;transition:all 0.3s;display:block}
 .contact-item:hover{border-color:var(--neon);transform:translateY(-3px)}
@@ -161,7 +187,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <h1>Building <span class="grad">intelligent agents</span> & RAG systems</h1>
       <p>MSc Artificial Intelligence @ BTU Cottbus. I design LLM agents, RAG pipelines, and fine-tuned models — turning research into production-grade AI.</p>
       <div class="cta-row">
-        <a href="mailto:vidya.rayar@gmail.com?subject=Resume Request" class="btn btn-primary">📄 Request Resume</a>   
+        <a href="mailto:vidya.rayar@gmail.com?subject=Resume Request" class="btn btn-primary">📄 Request Resume</a>
         <a href="#projects" class="btn btn-ghost">View Projects</a>
         <a href="#contact" class="btn btn-ghost">Get in Touch</a>
       </div>
@@ -200,17 +226,60 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
   </div>
 
   <div class="now-card">
-    <div class="meta">🚀 PERSONAL PROJECT · STARTING</div>
-    <h3>SupportPilot — Agentic AI for OSS Maintainers</h3>
-    <p>Building an end-to-end agent that auto-classifies, prioritizes, and drafts replies to GitHub issues for open-source maintainers. n8n + LangGraph orchestration with RAG, evals, and Langfuse observability.</p>
+    <div class="meta">🏥 PERSONAL PROJECT · IN PROGRESS</div>
+    <h3>Pharma Clinical Trials Agent</h3>
+    <p>Pharma analysts waste hours manually scanning ClinicalTrials.gov to track competitor activity. This pipeline fetches live trial data, runs it through <strong>Gemini AI</strong> to extract structured intelligence including phase, purpose, geography and organization, and surfaces it in a filterable dashboard. Analysts can instantly see where competitors are running trials, whether markets are still exploring (observational) or validating (interventional), and which geographies are heating up. Being evolved into an autonomous multi-agent monitoring system. See the live demo below.</p>
+    <video src="Demo-Video.mov" controls style="width:100%;border-radius:10px;margin:1rem 0;max-height:400px;background:#000"></video>
     <div class="tag-row">
-      <span class="tag">n8n</span>
-      <span class="tag">LangGraph</span>
-      <span class="tag">RAG</span>
-      <span class="tag">Langfuse</span>
-      <span class="tag">FastAPI</span>
+      <span class="tag">Python</span>
+      <span class="tag">Streamlit</span>
+      <span class="tag">Gemini AI</span>
+      <span class="tag">Plotly</span>
+      <span class="tag">Pandas</span>
+    </div>
+    <div class="gantt">
+      <div class="gantt-inner">
+        <!-- Month header: JUN spans cols 2-7 (6 half-cols = 3 weeks), JUL spans cols 8-13 (6 half-cols = 3 weeks) -->
+        <!-- Using 12 half-week columns so 1.5 weeks = 3 cols -->
+        <div style="display:grid;grid-template-columns:90px repeat(12,1fr);margin-bottom:2px;gap:1px">
+          <div></div>
+          <div class="gantt-month-cell done" style="grid-column:2/8">JUN 2026</div>
+          <div class="gantt-month-cell active" style="grid-column:8/14">JUL 2026</div>
+        </div>
+        <!-- Week header: each week = 2 half-cols -->
+        <div style="display:grid;grid-template-columns:90px repeat(12,1fr);margin-bottom:0.4rem;gap:1px">
+          <div></div>
+          <div class="gantt-week-cell" style="grid-column:2/4">W1<br>Jun 2–8</div>
+          <div class="gantt-week-cell today" style="grid-column:4/6">W2<br>Jun 9–15</div>
+          <div class="gantt-week-cell" style="grid-column:6/8">W3<br>Jun 16–22</div>
+          <div class="gantt-week-cell" style="grid-column:8/10">W1<br>Jul 1–7</div>
+          <div class="gantt-week-cell" style="grid-column:10/12">W2<br>Jul 8–14</div>
+          <div class="gantt-week-cell" style="grid-column:12/14">W3<br>Jul 15–21</div>
+        </div>
+        <!-- Phase 1 (Done): Jun W1–W2.5 = cols 2–5 (1.5 weeks = 3 half-cols) -->
+        <div style="display:grid;grid-template-columns:90px repeat(12,1fr);align-items:center;margin-bottom:0.4rem">
+          <div class="gantt-phase-label done">Phase 1<br>✓ Done</div>
+          <div class="gantt-bar done" style="grid-column:2/5">API fetch · Gemini · Dashboard</div>
+          <div class="gantt-cell" style="grid-column:5/14"></div>
+        </div>
+        <!-- Phase 2 (Active): Jun W2.5–W4 = cols 5–8 (1.5 weeks = 3 half-cols) -->
+        <div style="display:grid;grid-template-columns:90px repeat(12,1fr);align-items:center;margin-bottom:0.4rem">
+          <div class="gantt-phase-label active">Phase 2<br>▶ Active</div>
+          <div class="gantt-cell" style="grid-column:2/5"></div>
+          <div class="gantt-bar active" style="grid-column:5/8">Postgres · Airflow · Scale</div>
+          <div class="gantt-cell" style="grid-column:8/14"></div>
+        </div>
+        <!-- Phase 3 (Planned): Jul W1–W2.5 = cols 8–11 (1.5 weeks = 3 half-cols) -->
+        <div style="display:grid;grid-template-columns:90px repeat(12,1fr);align-items:center">
+          <div class="gantt-phase-label planned">Phase 3<br>◌ Planned</div>
+          <div class="gantt-cell" style="grid-column:2/8"></div>
+          <div class="gantt-bar planned" style="grid-column:8/11">Agentic · LangGraph</div>
+          <div class="gantt-cell" style="grid-column:11/14"></div>
+        </div>
+      </div>
     </div>
   </div>
+
 </section>
 
 <section id="journey">
@@ -249,6 +318,39 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
   <div class="section-tag mono">// PROJECTS</div>
   <h2 class="section-title">Selected <span class="grad">work</span></h2>
   <div class="projects-grid">
+
+    <div class="project-card">
+      <div class="project-cat mono">AI PIPELINE · PHARMA</div>
+      <h3>Pharma Clinical Trials Agent</h3>
+      <p>Fetches live clinical trial data from ClinicalTrials.gov, summarizes with Gemini AI, and displays in an interactive dashboard with world map, filters, and charts.</p>
+      <div class="tag-row">
+        <span class="tag">Streamlit</span><span class="tag">Gemini AI</span><span class="tag">Plotly</span><span class="tag">Pandas</span>
+      </div>
+      <div class="lifecycle" style="margin-bottom:1rem">
+        <div class="lifecycle-phase">
+          <div class="phase-dot done"></div>
+          <div class="phase-line">
+            <span class="phase-label done">PHASE 1 · DONE</span>
+            <span class="phase-desc">API fetch · AI summarization · Dashboard</span>
+          </div>
+        </div>
+        <div class="lifecycle-phase">
+          <div class="phase-dot active"></div>
+          <div class="phase-line">
+            <span class="phase-label active">PHASE 2 · IN PROGRESS</span>
+            <span class="phase-desc">Postgres · Airflow scheduler</span>
+          </div>
+        </div>
+        <div class="lifecycle-phase">
+          <div class="phase-dot planned"></div>
+          <div class="phase-line">
+            <span class="phase-label planned">PHASE 3 · PLANNED</span>
+            <span class="phase-desc">Agentic orchestration · LangGraph</span>
+          </div>
+        </div>
+      </div>
+      <a href="https://github.com/vidyashreerayar" target="_blank">GitHub →</a>
+    </div>
 
     <div class="project-card">
       <div class="project-cat mono">AI AGENT · TOOL USE</div>
@@ -297,6 +399,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <div class="tag-row"><span class="tag">DeepLabV3</span><span class="tag">MiDaS</span><span class="tag">PyTorch</span></div>
       <a href="https://github.com/vidyashreerayar/Solar-Panel-Fit-Estimation-using-Satellite-Imagery" target="_blank">GitHub →</a>
     </div>
+
   </div>
 </section>
 
@@ -313,7 +416,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <div>
         <h3>LLM-Based Control of Festo Fluid Process Systems</h3>
         <div class="venue mono">RSS Research Pitch & Networking Event · BTU Cottbus-Senftenberg</div>
-        <p>5-minute research pitch covering motivation (control gap in industrial fluid systems), approach (Llama 3.2 + LoRA/QLoRA + closed-loop control), and current results: 92.8% accuracy on temperature control, 57.8% on level control across 689 decisions.</p>
+        <p>5-minute research pitch covering motivation (control gap in industrial fluid systems), approach (Llama 3.2 + LoRA/QLoFA + closed-loop control), and current results: 92.8% accuracy on temperature control, 57.8% on level control across 689 decisions.</p>
         <div class="tag-row">
           <span class="tag">Research Pitch</span>
           <span class="tag">LLM Control</span>
@@ -381,13 +484,10 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
       <div class="date mono">Feb 2026</div>
     </div>
     <div class="cert-item">
-      <div class="name">Hugging Face Advanced AI Agents <span class="in-progress mono">IN PROGRESS</span></div>
-      <div class="date mono">2026</div>
-    </div>
-    <div class="cert-item">
       <div class="name">MSc Artificial Intelligence — Brandenburg University of Technology</div>
       <div class="date mono">Oct 2022 – Present</div>
     </div>
+  </div>
 </section>
 
 <section id="contact">
@@ -415,7 +515,7 @@ footer{padding:3rem 2rem;text-align:center;color:var(--muted);font-size:0.9rem;b
 </section>
 
 <footer>
-  <p>© 2026 Vidyashree Rayar · Built with HTML, CSS, and curiosity · <span class="mono">Last updated May 2026</span></p>
+  <p>© 2026 Vidyashree Rayar · Built with HTML, CSS, and curiosity · <span class="mono">Last updated June 2026</span></p>
 </footer>
 
 </body>
